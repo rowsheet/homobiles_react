@@ -6,19 +6,10 @@ import {
   Link
 } from "react-router-dom";
 
-import Foo from "./views/Foo";
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function Bar() {
-  return <h2>Bar</h2>;
-}
-
-function Baz() {
-  return <h2>Baz</h2>;
-}
+import Foo from './views/Foo';
+import Bar from './views/Bar';
+import Baz from './views/Baz';
+import Home from './views/Home';
 
 var component_routes = {
     "/foo": Foo,
