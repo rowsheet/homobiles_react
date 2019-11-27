@@ -6,12 +6,10 @@ import {
   Link
 } from "react-router-dom";
 
+import Foo from "./views/Foo";
+
 function Home() {
   return <h2>Home</h2>;
-}
-
-function Foo() {
-  return <h2>Foo</h2>;
 }
 
 function Bar() {
