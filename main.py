@@ -19,11 +19,17 @@ def index():
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" type="text/css"/>
 
 <style>
+body {
+    background: #eee;
+}
 div#App {
     background: lightgray;
     max-width: 500px;
     margin: auto;
     height: 100vh;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 0px 10px #00000075;
 }
 div#app_loading {
     padding-top: 40vh;

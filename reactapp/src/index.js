@@ -11,6 +11,10 @@ import Bar from './views/Bar';
 import Baz from './views/Baz';
 import Home from './views/Home';
 
+/* Note:
+ * React-Router is not the right tool for this job and should be removed.
+ */
+
 var component_routes = {
     "/foo": Foo,
     "/bar": Bar,
@@ -23,15 +27,24 @@ class App extends React.Component {
         var nav_links = Object.keys(component_routes).map(route => (
             <li><Link to={ route }>{ route }</Link></li>));
         var routes = Object.keys(component_routes).map(route => (
-            <Route path={ route }>{ React.createElement(component_routes[route]) }</Route>));
+            <Route path={ route }>{ React.createElement(
+                component_routes[route]) }</Route>));
+
+        /*----------------------------------------------------------------------
+         * Toggle Nav
+        ----------------------------------------------------------------------*/
+        var show_nav = false;
+        /*
+        var show_nav = true;
+        */
+        if (show_nav == true) {
+            var nav = (<nav><ul>{ nav_links.map( link => link) }</ul></nav>);
+        } else { var nav = null; }
+
         return (
 <Router>
     <div>
-        <nav>
-            <ul>
-                { nav_links.map( link => link) }
-            </ul>
-        </nav>
+        { nav }
         <Switch>
             { routes.map( route => route ) }
         </Switch>
