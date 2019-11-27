@@ -1,4 +1,5 @@
 import MobileSidebar from './MobileSidebar';
+import RowSheet from '../rowsheet';
 
 export class MobileLayout extends React.Component {
     constructor(props) {
@@ -73,7 +74,7 @@ export class MobileLayout extends React.Component {
             background: this.props.content_background,
             height: "calc(100vh - 50px)",
         }}>
-            { this.props.main_content }
+            { RowSheet.createElement(this.props.main_content) }
         </div>
     </div>
 </div>

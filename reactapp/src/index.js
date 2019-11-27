@@ -53,7 +53,68 @@ function GET_REMOTE_STATE(session_key) {
         RiderSidebar: {
             username: "John Smith",
             pronouns: "they/them/theirs",
-        }
+            footer: {
+                key: "switch_to_driving",
+                title: "Switch to driving",
+                icon: "fa-road",
+            },
+            items: [
+                {
+                    key: "request_a_ride",
+                    title: "request a ride",
+                    icon: "fa-car",
+                    active: true,
+                },
+                {
+                    key: "past_rides",
+                    title: "past rides",
+                    icon: "fa-car-side",
+                    active: false,
+                },
+                {
+                    key: "my_account",
+                    title: "my account",
+                    icon: "fa-user-circle",
+                    active: false,
+                },
+                {
+                    key: "payment_methods",
+                    title: "payment methods",
+                    icon: "fa-credit-card",
+                    active: false,
+                },
+                {
+                    key: "donation_station",
+                    title: "donation station",
+                    icon: "fa-heart",
+                    active: false,
+                },
+                {
+                    key: "settings",
+                    title: "settings",
+                    icon: "fa-cog",
+                    active: false,
+                },
+                {
+                    key: "become_a_driver",
+                    title: "become a driver",
+                    icon: "fa-car-alt",
+                    active: false,
+                },
+                {
+                    key: "about_homobiles",
+                    title: "about homobiles",
+                    icon: "fa-heading",
+                    active: false,
+                },
+                {
+                    key: "help",
+                    title: "help",
+                    icon: "fa-question-circle",
+                    active: false,
+                },
+            ],
+        },
     }
 }
 
@@ -88,17 +149,10 @@ class App extends React.Component {
         var initial_VIEW_CONFIG = this.GET_INITIAL_VIEW_CONFIG(
             stored_APP_STATE_app_view);
         var remote_APP_STATE = GET_REMOTE_STATE("fake_session_key");
-        // console.log("stored_APP_STATE");
-        // console.log(stored_APP_STATE);
-        // console.log("initial_VIEW_CONFIG");
-        // console.log(initial_VIEW_CONFIG);
         var union_APP_STATE = GET_UNION_STATE(stored_APP_STATE,
             initial_VIEW_CONFIG, remote_APP_STATE);
-        // console.log("union_APP_STATE");
-        // console.log(union_APP_STATE);
         this.state = union_APP_STATE;
         SET_STORED_STATE(union_APP_STATE);
-        // console.log("CONSTRUCTOR DONE");
     }
 
     GET_INITIAL_VIEW_CONFIG(app_view) {
@@ -140,22 +194,19 @@ class App extends React.Component {
                 config.sidebar_content = RiderSidebar;
                 return config;
             case "FOO":
-                // console.log("this.state");
-                // console.log(this.state);
-                config.main_content = React.createElement(Foo);
+                config.main_content = Foo;
                 config.sidebar_content = RiderSidebar;
                 return config;
             case "BAR":
-                config.main_content = React.createElement(Bar);
+                config.main_content = Bar;
                 config.sidebar_content = RiderSidebar;
                 return config;
             case "BAZ":
-                config.main_content = React.createElement(Baz);
+                config.main_content = Baz;
                 config.sidebar_content = RiderSidebar;
                 return config;
             case "FOO_1":
                 config.main_content = "foo 1 content";
-                config.sidebar_content = false;
                 // Close the sidebar.
                 // Go back to step "FOO".
                 config.sidebar_open = false;
@@ -164,7 +215,6 @@ class App extends React.Component {
                 return config;
             case "FOO_2":
                 config.main_content = "foo 2 content";
-                config.sidebar_content = false;
                 // Close the sidebar.
                 // Go back to step "FOO_1".
                 config.sidebar_open = false;
@@ -189,8 +239,6 @@ class App extends React.Component {
     }
 
     render() {
-        // console.log("render...");
-        // console.log(this.state);
         return (
 <div>
     { this.tempViewToggle(true) }

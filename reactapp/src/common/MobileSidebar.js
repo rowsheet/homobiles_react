@@ -1,3 +1,5 @@
+import RowSheet from '../rowsheet';
+
 export class MobileSidebar extends React.Component {
 
     constructor(props) {
@@ -32,15 +34,11 @@ export class MobileSidebar extends React.Component {
     }
 
     render() {
-        var sidebar_content = "";
-        if (this.props.sidebar_content) {
-            sidebar_content = React.createElement(this.props.sidebar_content, this.props);
-        }
         return (
 <div className="rs_sidebar_overlay" style={this.overlay_style()}
-            onClick={this.props.close_sidebar}>
+        onClick={this.props.close_sidebar}>
     <div className="rs_sidebar" style={this.style()}>
-        { sidebar_content }
+        { RowSheet.createElement(this.props.sidebar_content, this.props) }
     </div>
 </div>
         );
