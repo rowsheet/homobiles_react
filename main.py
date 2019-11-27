@@ -17,6 +17,9 @@ def index():
 <script src="/static/bootstrap.min.js"></script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Rubik:500&display=swap" rel="stylesheet">
+
 
 <style>
 body {
@@ -38,6 +41,15 @@ div#app_loading {
 div#app_loading * {
     display: inline-block;
     font-size: 30px;
+    color: white;
+}
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+*.title_text {
+    font-family: 'Rubik', sans-serif;
+}
+*.white {
     color: white;
 }
 </style>

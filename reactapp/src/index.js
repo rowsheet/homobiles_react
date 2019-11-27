@@ -1,10 +1,42 @@
 import React from "react";
 
+/*--------------------------------------------------------------------------
+ ██████╗ ██████╗ ██╗██╗   ██╗███████╗██████╗ ███████╗
+ ██╔══██╗██╔══██╗██║██║   ██║██╔════╝██╔══██╗██╔════╝
+ ██║  ██║██████╔╝██║██║   ██║█████╗  ██████╔╝███████╗
+ ██║  ██║██╔══██╗██║╚██╗ ██╔╝██╔══╝  ██╔══██╗╚════██║
+ ██████╔╝██║  ██║██║ ╚████╔╝ ███████╗██║  ██║███████║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝
+--------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------
+ ██████╗ ██╗██████╗ ███████╗██████╗ ███████╗
+ ██╔══██╗██║██╔══██╗██╔════╝██╔══██╗██╔════╝
+ ██████╔╝██║██║  ██║█████╗  ██████╔╝███████╗
+ ██╔══██╗██║██║  ██║██╔══╝  ██╔══██╗╚════██║
+ ██║  ██║██║██████╔╝███████╗██║  ██║███████║
+ ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
+--------------------------------------------------------------------------*/
+
+import RiderSidebar from './views/RiderSidebar';
 import Foo from './views/Foo';
 import Bar from './views/Bar';
 import Baz from './views/Baz';
 
+/*--------------------------------------------------------------------------
+ ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ ██████╗ ███╗   ██╗
+██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔═══██╗████╗  ██║
+██║     ██║   ██║██╔████╔██║██╔████╔██║██║   ██║██╔██╗ ██║
+██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║   ██║██║╚██╗██║
+╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+--------------------------------------------------------------------------*/
+
 import MobileLayout from './common/MobileLayout';
+
+/*--------------------------------------------------------------------------
+| Main App
+--------------------------------------------------------------------------*/
 
 class App extends React.Component {
 
@@ -18,11 +50,14 @@ class App extends React.Component {
          * Note:
          *      This should be fetched from the cookie.
         ------------------------------------------------------------------*/
-
+        /*
         var initial_app_view = this.determine_app_view() 
         this.state = {
             app_view: initial_app_view,
         }
+        */
+        this.load_session = this.load_session.bind(this);
+        this.state = this.load_state();
 
         /*------------------------------------------------------------------
          * Bind class methods
@@ -42,20 +77,58 @@ class App extends React.Component {
         this.state = this.view_config(this.state.app_view);
     }
 
+    load_session(session_key) {
+        return {
+            RiderSidebar: {
+                username: "John Smith",
+                pronouns: "they/them/theirs",
+            }
+        }
+    }
+    
+    /*----------------------------------------------------------------------
+     * Tell me one good reason I should do this.
+     *
+     * 1) Load the previous state from sessionStorage.
+     * 2) Load remove updates via AJAX.
+    ----------------------------------------------------------------------*/
+    load_state() {
+        var previousState = sessionStorage.getItem("APP_STATE");
+        if (previousState) {
+            previousState = JSON.parse(previousState);
+            var sessionState = this.load_session(previousState.session_key);
+            // Loading sessionState after will overwrite anything in the
+            // previousState, which is what is more "correct".
+            return {...previousState, ...sessionState}
+        } else {
+            return { app_view: "INITIAL_SCREEN" };
+        }
+    }
+
     /*----------------------------------------------------------------------
      * Only on initialization.
      * Determine the proper state based on cookies for the on page-load.
      * @TODO Check API and session things.
     ----------------------------------------------------------------------*/
+    /*
     determine_app_view() {
+        var previous_app_view = GET_COOKIE("APP_VIEW");
+        if (previous_app_view) {
+            return previous_app_view;
+        }
         return "INITIAL_SCREEN";
     }
+    */
 
     /*----------------------------------------------------------------------
      * Set the app_view based on a detailed match case of the view_config.
     ----------------------------------------------------------------------*/
     setAppView(app_view) {
-        this.setState(this.view_config(app_view));
+        var old_state = this.state;
+        var new_state = this.view_config(app_view);
+        var state = {...old_state, ...new_state};
+        this.setState(state);
+        sessionStorage.setItem("APP_STATE", JSON.stringify(new_state));
     }
 
     /*----------------------------------------------------------------------
@@ -91,6 +164,14 @@ class App extends React.Component {
          * specified to override layout functions such as the chevron 
          * back-button which normall opens the sidebar. */
         switch (app_view) {
+            /*--------------------------------------------------------------
+             ██████╗ ██╗██████╗ ███████╗██████╗ ███████╗
+             ██╔══██╗██║██╔══██╗██╔════╝██╔══██╗██╔════╝
+             ██████╔╝██║██║  ██║█████╗  ██████╔╝███████╗
+             ██╔══██╗██║██║  ██║██╔══╝  ██╔══██╗╚════██║
+             ██║  ██║██║██████╔╝███████╗██║  ██║███████║
+             ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
+            --------------------------------------------------------------*/
             case "INITIAL_SCREEN":
                 config.main_content = "initial screen content";
                 config.sidebar_content = "initial screen sidebar";
@@ -98,11 +179,13 @@ class App extends React.Component {
             case "FOO":
                 var foo = new Foo();
                 config.main_content = foo.render();
-                config.sidebar_content = "foo sidebar";
+                console.log("BEFORE");
+                config.sidebar_content = (
+                    <RiderSidebar{...this.state} foo="test"/>);
+                console.log("AFTER");
                 return config;
             case "FOO_1":
                 config.main_content = "foo 1 content";
-                config.sidebar_content = "foo 1 sidebar";
                 // Close the sidebar.
                 // Go back to step "FOO".
                 config.sidebar_open = false;
@@ -111,7 +194,6 @@ class App extends React.Component {
                 return config;
             case "FOO_2":
                 config.main_content = "foo 2 content";
-                config.sidebar_content = "foo 2 sidebar";
                 // Close the sidebar.
                 // Go back to step "FOO_1".
                 config.sidebar_open = false;
@@ -120,7 +202,6 @@ class App extends React.Component {
                 return config;
             case "FOO_3":
                 config.main_content = "foo 3 content";
-                config.sidebar_content = "foo 3 sidebar";
                 // Close the sidebar.
                 // Go back to step "FOO_2".
                 config.sidebar_open = false;
@@ -129,7 +210,6 @@ class App extends React.Component {
                 return config;
             case "FOO_4":
                 config.main_content = "foo 4 content";
-                config.sidebar_content = "foo 4 sidebar";
                 // Close the sidebar.
                 // Go back to step "FOO_3".
                 config.sidebar_open = false;
@@ -146,6 +226,14 @@ class App extends React.Component {
                 config.main_content = baz.render();
                 config.sidebar_content = "baz sidebar";
                 return config;
+            /*--------------------------------------------------------------
+             ██████╗ ██████╗ ██╗██╗   ██╗███████╗██████╗ ███████╗
+             ██╔══██╗██╔══██╗██║██║   ██║██╔════╝██╔══██╗██╔════╝
+             ██║  ██║██████╔╝██║██║   ██║█████╗  ██████╔╝███████╗
+             ██║  ██║██╔══██╗██║╚██╗ ██╔╝██╔══╝  ██╔══██╗╚════██║
+             ██████╔╝██║  ██║██║ ╚████╔╝ ███████╗██║  ██║███████║
+             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝
+            --------------------------------------------------------------*/
             default:
                 config.main_content = "default content";
                 config.sidebar_content = "default sidebar";
