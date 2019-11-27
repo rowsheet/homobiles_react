@@ -96,7 +96,8 @@ class App extends React.Component {
                 config.sidebar_content = "initial screen sidebar";
                 return config;
             case "FOO":
-                config.main_content = "foo content";
+                var foo = new Foo();
+                config.main_content = foo.render();
                 config.sidebar_content = "foo sidebar";
                 return config;
             case "FOO_1":
@@ -136,11 +137,13 @@ class App extends React.Component {
                     this.handle_back_button("FOO_3");
                 return config;
             case "BAR":
-                config.main_content = "bar content";
+                var bar = new Bar();
+                config.main_content = bar.render();
                 config.sidebar_content = "bar sidebar";
                 return config;
             case "BAZ":
-                config.main_content = "baz content";
+                var baz = new Baz();
+                config.main_content = baz.render();
                 config.sidebar_content = "baz sidebar";
                 return config;
             default:

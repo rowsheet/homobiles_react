@@ -1,6 +1,6 @@
 export class Baz extends React.Component {
     render() {
-        return (<h2>Baz</h2>);
+        return (<h2>Baz Actual Content.</h2>);
     }
 }
 
