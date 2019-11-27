@@ -48,13 +48,23 @@ function GET_VALID_STORED_STATE() {
     }
 }
 
-function GET_UNION_STATE(stored_APP_STATE, initial_VIEW_CONFIG) {
-    var union_STATE = {...stored_APP_STATE, ...initial_VIEW_CONFIG};
+function GET_REMOTE_STATE(session_key) {
+    return {
+        RiderSidebar: {
+            username: "John Smith",
+            pronouns: "they/them/theirs",
+        }
+    }
+}
+
+function GET_UNION_STATE(stored_APP_STATE, initial_VIEW_CONFIG, remote_APP_STATE) {
+    var union_STATE = {...stored_APP_STATE,
+        ...initial_VIEW_CONFIG, ...remote_APP_STATE};
     return union_STATE;
 }
 
 function SET_STORED_STATE(ephemeral_APP_STATE) {
-     var serialized_APP_STATE = JSON.stringify(ephemeral_APP_STATE);
+    var serialized_APP_STATE = JSON.stringify(ephemeral_APP_STATE);
     sessionStorage.setItem("APP_STATE", serialized_APP_STATE);
 }
 
@@ -77,11 +87,15 @@ class App extends React.Component {
         var stored_APP_STATE_app_view = stored_APP_STATE.app_view;
         var initial_VIEW_CONFIG = this.GET_INITIAL_VIEW_CONFIG(
             stored_APP_STATE_app_view);
+        var remote_APP_STATE = GET_REMOTE_STATE("fake_session_key");
         // console.log("stored_APP_STATE");
         // console.log(stored_APP_STATE);
         // console.log("initial_VIEW_CONFIG");
         // console.log(initial_VIEW_CONFIG);
-        this.state = GET_UNION_STATE(stored_APP_STATE, initial_VIEW_CONFIG);
+        var union_APP_STATE = GET_UNION_STATE(stored_APP_STATE,
+            initial_VIEW_CONFIG, remote_APP_STATE);
+        this.state = union_APP_STATE;
+        SET_STORED_STATE(union_APP_STATE);
     }
 
     GET_INITIAL_VIEW_CONFIG(app_view) {
