@@ -1,0 +1,31 @@
+{
+  "name": "homobiles",
+  "version": "0.0.1",
+  "description": "Homobiles ReactJS App",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "package.json": "^2.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-vis": "^1.11.7",
+    "style-loader": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Harrison",
+  "license": "Copyright 2019 RowSheet LLC"
+}
