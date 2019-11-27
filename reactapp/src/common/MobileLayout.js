@@ -47,6 +47,9 @@ export class MobileLayout extends React.Component {
         }
         return (
 <div style={{ background: "red", height: "100vh" }}>
+
+    {/* ----------- SIDEBAR -------------------------------------------- */}
+
     <MobileSidebar {...this.state}
             sidebar_open={ sidebar_open }
             close_sidebar={ this.close_sidebar }
@@ -54,20 +57,23 @@ export class MobileLayout extends React.Component {
             sidebar_content={ this.props.sidebar_content }
             >
     </MobileSidebar>
-    <div className="rs_main" style={{
-    }}>
+
+    {/* ----------- MAIN CONTENT --------------------------------------- */}
+
+    <div className="rs_main">
         <div className="rs_main_header" style={{
             background: this.props.header_background,
             height: "50px",
         }}>
             <i className="fas fa-chevron-left" style={{ padding: "15px" }}
-            onClick={ this.handle_layout_back_button }></i>
+                onClick={ this.handle_layout_back_button }></i>
         </div>
+
         <div className="rs_main_content" style={{
             background: this.props.content_background,
             height: "calc(100vh - 50px)",
         }}>
-            <p>{ this.props.main_content }</p>
+            { this.props.main_content }
         </div>
     </div>
 </div>
