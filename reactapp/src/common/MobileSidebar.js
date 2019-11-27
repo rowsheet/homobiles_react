@@ -2,9 +2,6 @@ export class MobileSidebar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            open: props.open,
-        }
     }
 
     style() {
@@ -35,11 +32,15 @@ export class MobileSidebar extends React.Component {
     }
 
     render() {
+        var sidebar_content = "";
+        if (this.props.sidebar_content) {
+            sidebar_content = React.createElement(this.props.sidebar_content, this.props);
+        }
         return (
 <div className="rs_sidebar_overlay" style={this.overlay_style()}
             onClick={this.props.close_sidebar}>
     <div className="rs_sidebar" style={this.style()}>
-        { this.props.sidebar_content }
+        { sidebar_content }
     </div>
 </div>
         );

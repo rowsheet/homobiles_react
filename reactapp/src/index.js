@@ -94,8 +94,11 @@ class App extends React.Component {
         // console.log(initial_VIEW_CONFIG);
         var union_APP_STATE = GET_UNION_STATE(stored_APP_STATE,
             initial_VIEW_CONFIG, remote_APP_STATE);
+        // console.log("union_APP_STATE");
+        // console.log(union_APP_STATE);
         this.state = union_APP_STATE;
         SET_STORED_STATE(union_APP_STATE);
+        // console.log("CONSTRUCTOR DONE");
     }
 
     GET_INITIAL_VIEW_CONFIG(app_view) {
@@ -134,23 +137,25 @@ class App extends React.Component {
             --------------------------------------------------------------*/
             case "INITIAL_SCREEN":
                 config.main_content = "initial screen content";
-                config.sidebar_content = "initial screen sidebar";
+                config.sidebar_content = RiderSidebar;
                 return config;
             case "FOO":
+                // console.log("this.state");
+                // console.log(this.state);
                 config.main_content = React.createElement(Foo);
-                config.sidebar_content = "foo sidebar";
+                config.sidebar_content = RiderSidebar;
                 return config;
             case "BAR":
                 config.main_content = React.createElement(Bar);
-                config.sidebar_content = "bar sidebar";
+                config.sidebar_content = RiderSidebar;
                 return config;
             case "BAZ":
                 config.main_content = React.createElement(Baz);
-                config.sidebar_content = "baz sidebar";
+                config.sidebar_content = RiderSidebar;
                 return config;
             case "FOO_1":
                 config.main_content = "foo 1 content";
-                config.sidebar_content = "foo 1 sidebar";
+                config.sidebar_content = false;
                 // Close the sidebar.
                 // Go back to step "FOO".
                 config.sidebar_open = false;
@@ -159,7 +164,7 @@ class App extends React.Component {
                 return config;
             case "FOO_2":
                 config.main_content = "foo 2 content";
-                config.sidebar_content = "foo 2 sidebar";
+                config.sidebar_content = false;
                 // Close the sidebar.
                 // Go back to step "FOO_1".
                 config.sidebar_open = false;
@@ -184,6 +189,8 @@ class App extends React.Component {
     }
 
     render() {
+        // console.log("render...");
+        // console.log(this.state);
         return (
 <div>
     { this.tempViewToggle(true) }

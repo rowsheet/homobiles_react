@@ -50,7 +50,7 @@ export class MobileLayout extends React.Component {
 
     {/* ----------- SIDEBAR -------------------------------------------- */}
 
-    <MobileSidebar {...this.state}
+    <MobileSidebar {...this.props }
             sidebar_open={ sidebar_open }
             close_sidebar={ this.close_sidebar }
             sidebar_background={ this.props.sidebar_background }
