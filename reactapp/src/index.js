@@ -22,6 +22,7 @@ import RiderSidebar from './views/RiderSidebar';
 import Foo from './views/Foo';
 import Bar from './views/Bar';
 import Baz from './views/Baz';
+import CoverContentLayout from './views/CoverContentLayout';
 
 /*--------------------------------------------------------------------------
  ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ ██████╗ ███╗   ██╗
@@ -193,6 +194,10 @@ class App extends React.Component {
                 config.main_content = "initial screen content";
                 config.sidebar_content = RiderSidebar;
                 return config;
+            case "TEMP_COVER_CONTENT_LAYOUT":
+                config.main_content = CoverContentLayout;
+                config.sidebar_content = RiderSidebar;
+                return config;
             case "FOO":
                 config.main_content = Foo;
                 config.sidebar_content = RiderSidebar;
@@ -257,8 +262,10 @@ class App extends React.Component {
         if (event == true) {
             return (
             <select value={this.state.app_view}
-                onChange={this.tempViewToggle}>{[
+                onChange={this.tempViewToggle}
+                style={{ position: "absolute" }}>{[
                     "INITIAL_SCREEN",
+                    "TEMP_COVER_CONTENT_LAYOUT",
                     "FOO",
                     "FOO_1",
                     "FOO_2",

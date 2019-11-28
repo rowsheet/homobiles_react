@@ -62,17 +62,16 @@ export class MobileLayout extends React.Component {
     {/* ----------- MAIN CONTENT --------------------------------------- */}
 
     <div className="rs_main">
-        <div className="rs_main_header" style={{
-            background: this.props.header_background,
-            height: "50px",
-        }}>
-            <i className="fas fa-chevron-left" style={{ padding: "15px" }}
-                onClick={ this.handle_layout_back_button }></i>
-        </div>
+        <i className="fas fa-chevron-left" style={{
+            padding: "15px",
+            position: "absolute",
+            fontSize: "25px",
+        }}
+            onClick={ this.handle_layout_back_button }></i>
 
         <div className="rs_main_content" style={{
-            background: this.props.content_background,
-            height: "calc(100vh - 50px)",
+            background: "white",
+            height: "100vh",
         }}>
             { RowSheet.createElement(this.props.main_content) }
         </div>
