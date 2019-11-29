@@ -1,7 +1,7 @@
 import TitlePadding from '../common/TitlePadding';
 import PageTitle from '../common/PageTitle';
 import SubText from '../common/SubText';
-import PhoneForm from '../common/forms/PhoneForm';
+import TextInput from '../common/forms/TextInput';
 
 import RowSheet from '../rowsheet';
 import SETTINGS from '../settings';
@@ -30,24 +30,9 @@ class RiderVerificationScreen extends React.Component {
                 { value: page_title, centered: false, bold: true }),
             RowSheet.createElement(SubText,
                 { value: sub_text, centered: false }),
-            // DEFAULT 
-            RowSheet.createElement(PhoneForm),
             // ICON_LEFT
-            RowSheet.createElement(PhoneForm, 
+            RowSheet.createElement(TextInput, 
                 { iconLeft: "fa-phone" }),
-            // ICON_LEFT_BORDER
-            RowSheet.createElement(PhoneForm, 
-                { iconLeft: "fa-phone", iconLeftBorder: true }),
-            // ICON_RIGHT
-            RowSheet.createElement(PhoneForm, 
-                { iconRight: "fa-phone" }),
-            // ICON_RIGHT_BORDER
-            RowSheet.createElement(PhoneForm, 
-                { iconRight: "fa-user", iconRightBorder: true }),
-            // ALL
-            RowSheet.createElement(PhoneForm, 
-                { iconRight: "fa-phone", iconRightBorder: true,
-                iconLeft: "fa-cog", iconLeftBorder: true }),
         );
     }
 }

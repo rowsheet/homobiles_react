@@ -1,6 +1,6 @@
 import SETTINGS from '../../settings';
 
-export default class PhoneForm extends React.Component {
+export default class TextInput extends React.Component {
 
     constructor(props) {
         super(props);

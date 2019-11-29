@@ -6,6 +6,7 @@ import LayoutWithSidebar from './common/LayoutWithSidebar';
 // DEMO
 import DemoMapForm from './views/DemoMapForm';
 import DemoItemList from './views/DemoItemList';
+import DemoFormInputs from './views/DemoFormInputs';
 // RIDER
 import RiderVerificationScreen from './views/RiderVerificationScreen';
 import RiderSidebar from './views/RiderSidebar';
@@ -108,6 +109,10 @@ class App extends React.Component {
                 config.main_content = DemoItemList;
                 config.sidebar_content = RiderSidebar;
                 return config;
+            case "DEMO_FORM_INPUTS":
+                config.main_content = DemoFormInputs;
+                config.sidebar_content = RiderSidebar;
+                return config;
             /***************************************************************
              * RIDER 
              **************************************************************/
@@ -194,6 +199,7 @@ class App extends React.Component {
                     // DEMO
                     "DEMO_MAP_FORM",
                     "DEMO_ITEM_LIST",
+                    "DEMO_FORM_INPUTS",
                     // RIDER
                     "RIDER_VERIFICATION_SCREEN",
                     "INITIAL_SCREEN",
