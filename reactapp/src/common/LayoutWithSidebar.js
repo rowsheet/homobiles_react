@@ -1,7 +1,7 @@
-import MobileSidebar from './MobileSidebar';
+import SidebarLeft from './SidebarLeft';
 import RowSheet from '../rowsheet';
 
-export class MobileLayout extends React.Component {
+export class LayoutWithSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,13 +51,13 @@ export class MobileLayout extends React.Component {
 
     {/* ----------- SIDEBAR -------------------------------------------- */}
 
-    <MobileSidebar {...this.props }
+    <SidebarLeft {...this.props }
             sidebar_open={ sidebar_open }
             close_sidebar={ this.close_sidebar }
             sidebar_background={ this.props.sidebar_background }
             sidebar_content={ this.props.sidebar_content }
             >
-    </MobileSidebar>
+    </SidebarLeft>
 
     {/* ----------- MAIN CONTENT --------------------------------------- */}
 
@@ -74,7 +74,7 @@ export class MobileLayout extends React.Component {
             background: "white",
             height: "100vh",
         }}>
-            { RowSheet.createElement(this.props.main_content) }
+            { RowSheet.createElement(this.props.main_content, this.props) }
         </div>
     </div>
 </div>
@@ -82,4 +82,4 @@ export class MobileLayout extends React.Component {
     }
 }
 
-export default MobileLayout;
+export default LayoutWithSidebar;

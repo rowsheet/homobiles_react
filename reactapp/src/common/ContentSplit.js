@@ -1,6 +1,6 @@
 import RowSheet from '../rowsheet';
 
-export class CoverContentLayout extends React.Component {
+export class ContentSplit extends React.Component {
 
     constructor(props) {
         super(props);
@@ -8,19 +8,19 @@ export class CoverContentLayout extends React.Component {
 
     render() {
         return (
-<div id="CoverContentLayout" style={{
+<div id="ContentSplit" style={{
     display: "flex",
     height: "100vh",
     flexFlow: "column",
 }}>
-    <div id="CoverContentLayout_top" style={{
+    <div id="ContentSplit_top" style={{
         background: "lightgreen",
         flex: "1",
         overflow: "hidden",
     }}>
         { RowSheet.createElement(this.props.top) }
     </div>
-    <div id="CoverContentLayout_bottom" style={{
+    <div id="ContentSplit_bottom" style={{
         background: "lightblue",
     }}>
         { RowSheet.createElement(this.props.bottom) }
@@ -30,4 +30,4 @@ export class CoverContentLayout extends React.Component {
     }
 }
 
-export default CoverContentLayout;
+export default ContentSplit;

@@ -1,40 +1,14 @@
 import React from "react";
 
-/*--------------------------------------------------------------------------
- ██████╗ ██████╗ ██╗██╗   ██╗███████╗██████╗ ███████╗
- ██╔══██╗██╔══██╗██║██║   ██║██╔════╝██╔══██╗██╔════╝
- ██║  ██║██████╔╝██║██║   ██║█████╗  ██████╔╝███████╗
- ██║  ██║██╔══██╗██║╚██╗ ██╔╝██╔══╝  ██╔══██╗╚════██║
- ██████╔╝██║  ██║██║ ╚████╔╝ ███████╗██║  ██║███████║
- ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝
---------------------------------------------------------------------------*/
-
-/*--------------------------------------------------------------------------
- ██████╗ ██╗██████╗ ███████╗██████╗ ███████╗
- ██╔══██╗██║██╔══██╗██╔════╝██╔══██╗██╔════╝
- ██████╔╝██║██║  ██║█████╗  ██████╔╝███████╗
- ██╔══██╗██║██║  ██║██╔══╝  ██╔══██╗╚════██║
- ██║  ██║██║██████╔╝███████╗██║  ██║███████║
- ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
---------------------------------------------------------------------------*/
-
+import LayoutWithSidebar from './common/LayoutWithSidebar';
+// DEMO
+import DemoMapForm from './views/DemoMapForm';
+// RIDER
 import RiderSidebar from './views/RiderSidebar';
-import Foo from './views/Foo';
-import Bar from './views/Bar';
-import Baz from './views/Baz';
-import CoverContentLayout from './common/CoverContentLayout';
-import MapForm from './common/MapForm';
+import RiderFoo from './views/RiderFoo';
+import RiderBar from './views/RiderBar';
+import RiderBaz from './views/RiderBaz';
 
-/*--------------------------------------------------------------------------
- ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ ██████╗ ███╗   ██╗
-██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔═══██╗████╗  ██║
-██║     ██║   ██║██╔████╔██║██╔████╔██║██║   ██║██╔██╗ ██║
-██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║   ██║██║╚██╗██║
-╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
- ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
---------------------------------------------------------------------------*/
-
-import MobileLayout from './common/MobileLayout';
 
 function GET_VALID_STORED_STATE() {
     var stored_APP_STATE = sessionStorage.getItem("APP_STATE");
@@ -183,62 +157,51 @@ class App extends React.Component {
             sidebar_open: null,
         }
         switch (app_view) {
-            /*--------------------------------------------------------------
-             ██████╗ ██╗██████╗ ███████╗██████╗ ███████╗
-             ██╔══██╗██║██╔══██╗██╔════╝██╔══██╗██╔════╝
-             ██████╔╝██║██║  ██║█████╗  ██████╔╝███████╗
-             ██╔══██╗██║██║  ██║██╔══╝  ██╔══██╗╚════██║
-             ██║  ██║██║██████╔╝███████╗██║  ██║███████║
-             ╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
-            --------------------------------------------------------------*/
+            /***************************************************************
+             * DEMO 
+             **************************************************************/
+            case "DEMO_MAP_FORM":
+                config.main_content = DemoMapForm;
+                config.sidebar_content = RiderSidebar;
+                return config;
+            /***************************************************************
+             * RIDER 
+             **************************************************************/
             case "INITIAL_SCREEN":
-                config.main_content = "initial screen content";
+                config.main_content = () => (<h1>initial screen content</h1>);
                 config.sidebar_content = RiderSidebar;
                 return config;
-            case "TEMP_COVER_CONTENT_LAYOUT":
-                config.main_content = CoverContentLayout;
+            case "RIDER_FOO":
+                config.main_content = RiderFoo;
                 config.sidebar_content = RiderSidebar;
                 return config;
-            case "TEMP_MAP_FORM":
-                config.main_content = MapForm;
+            case "RIDER_BAR":
+                config.main_content = RiderBar;
                 config.sidebar_content = RiderSidebar;
                 return config;
-            case "FOO":
-                config.main_content = Foo;
+            case "RIDER_BAZ":
+                config.main_content = RiderBaz;
                 config.sidebar_content = RiderSidebar;
                 return config;
-            case "BAR":
-                config.main_content = Bar;
-                config.sidebar_content = RiderSidebar;
-                return config;
-            case "BAZ":
-                config.main_content = Baz;
-                config.sidebar_content = RiderSidebar;
-                return config;
-            case "FOO_1":
-                config.main_content = "foo 1 content";
+            case "RIDER_FOO_1":
+                config.main_content = () => (<h1>rider foo 1 content</h1>);
                 // Close the sidebar.
-                // Go back to step "FOO".
+                // Go back to step "RIDER_FOO".
                 config.sidebar_open = false;
                 config.handle_back_button = () =>
-                    this.handle_back_button("FOO");
+                    this.handle_back_button("RIDER_FOO");
                 return config;
-            case "FOO_2":
-                config.main_content = "foo 2 content";
+            case "RIDER_FOO_2":
+                config.main_content = () => (<h1>rider foo 2 content</h1>);
                 // Close the sidebar.
-                // Go back to step "FOO_1".
+                // Go back to step "RIDER_FOO_1".
                 config.sidebar_open = false;
                 config.handle_back_button = () =>
-                    this.handle_back_button("FOO_1");
+                    this.handle_back_button("RIDER_FOO_1");
                 return config;
-            /*--------------------------------------------------------------
-             ██████╗ ██████╗ ██╗██╗   ██╗███████╗██████╗ ███████╗
-             ██╔══██╗██╔══██╗██║██║   ██║██╔════╝██╔══██╗██╔════╝
-             ██║  ██║██████╔╝██║██║   ██║█████╗  ██████╔╝███████╗
-             ██║  ██║██╔══██╗██║╚██╗ ██╔╝██╔══╝  ██╔══██╗╚════██║
-             ██████╔╝██║  ██║██║ ╚████╔╝ ███████╗██║  ██║███████║
-             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝
-            --------------------------------------------------------------*/
+            /***************************************************************
+             * DRIVER 
+             **************************************************************/
             default:
                 config.main_content = "default content";
                 config.sidebar_content = "default sidebar";
@@ -252,8 +215,8 @@ class App extends React.Component {
         return (
 <div>
     { this.tempViewToggle(true) }
-    <MobileLayout {...this.state }>
-    </MobileLayout>
+    <LayoutWithSidebar {...this.state }>
+    </LayoutWithSidebar>
 </div>
         );
     }
@@ -269,14 +232,17 @@ class App extends React.Component {
             <select value={this.state.app_view}
                 onChange={this.tempViewToggle}
                 style={{ position: "absolute", zIndex: "1" }}>{[
+                    // COMMON
+                    // DEMO
+                    "DEMO_MAP_FORM",
+                    // RIDER
                     "INITIAL_SCREEN",
-                    "TEMP_COVER_CONTENT_LAYOUT",
-                    "TEMP_MAP_FORM",
-                    "FOO",
-                    "FOO_1",
-                    "FOO_2",
-                    "BAR",
-                    "BAZ",
+                    "RIDER_FOO",
+                    "RIDER_FOO_1",
+                    "RIDER_FOO_2",
+                    "RIDER_BAR",
+                    "RIDER_BAZ",
+                    // DRIVER
                 ].map(item => (<option value={item}>{item}</option>))}
             </select>);
         } else {

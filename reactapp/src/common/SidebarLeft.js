@@ -1,6 +1,6 @@
 import RowSheet from '../rowsheet';
 
-export class MobileSidebar extends React.Component {
+export class SidebarLeft extends React.Component {
 
     constructor(props) {
         super(props);
@@ -46,4 +46,4 @@ export class MobileSidebar extends React.Component {
     }
 }
 
-export default MobileSidebar;
+export default SidebarLeft;
