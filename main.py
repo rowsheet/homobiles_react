@@ -8,8 +8,6 @@ RENDER_MODES = [
     "DEBUG_VERBOSE",
     # "DEBUG",
     # "DEBUG_VERBOSE",
-    # "DEBUG_VERBOSE_BORDER_TOP",
-    # "DEBUG_VERBOSE_BORDER_BOTTOM",
 ]
 
 @app.route('/')
@@ -79,7 +77,15 @@ div#app_loading_spinner {
     """ % {
         "GOOGLE_MAPS_API_KEY": GOOGLE_MAPS_API_KEY,
         "RENDER_MODES": " ".join(RENDER_MODES),
-        "RS_DEBUG": "<script>window.RS_DEBUG = true;</script>" if "DEBUG" in RENDER_MODES else ""
+        "RS_DEBUG": """
+        <script>
+            window.RS_DEBUG = true;
+            sessionStorage.setItem("RS_DEBUG", true);
+        </script>""" if "DEBUG" in RENDER_MODES else """
+        <script>
+            window.RS_DEBUG = true;
+            sessionStorage.setItem("RS_DEBUG", false);
+        </script>"""
     }
 
 @app.route('/reactapp/<path:path>')

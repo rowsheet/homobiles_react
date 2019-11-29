@@ -1,5 +1,37 @@
 import Debug from './debug';
 
+// EASY ACCESS.
+
+window.DISABLE_RS_DEBUG = function() {
+    sessionStorage.removeItem("RS_DEBUG");
+    sessionStorage.setItem("RS_DEBUG_LAST", false);
+    document.querySelector("body").removeAttribute(
+        "class");
+}
+
+window.ENABLE_RS_DEBUG = function() {
+    sessionStorage.setItem("RS_DEBUG", true);
+    sessionStorage.setItem("RS_DEBUG_LAST", true);
+    document.querySelector("body").setAttribute(
+        "class", "DEBUG DEBUG_VERBOSE");
+}
+
+window.RSDB = function() {
+    if (sessionStorage.getItem("RS_DEBUG") == "true") {
+        DISABLE_RS_DEBUG();
+    } else {
+        ENABLE_RS_DEBUG();
+    }
+}
+
+window.onload = function() {
+    if (sessionStorage.getItem("RS_DEBUG_LAST") == "true") {
+        ENABLE_RS_DEBUG();
+    } else {
+        DISABLE_RS_DEBUG();
+    }
+}
+
 /*------------------------------------------------------------------------------
 PRIVATE
 ------------------------------------------------------------------------------*/
@@ -10,13 +42,13 @@ PRIVATE
  */
 
 function isFunctionalComponent(Component) {
-  return (
-    typeof Component === 'function' // can be various things
-    && !(
-      Component.prototype // native arrows don't have prototypes
-      && Component.prototype.isReactComponent // special property
-    )
-  );
+    return (
+        typeof Component === 'function' // can be various things
+        && !(
+            Component.prototype // native arrows don't have prototypes
+            && Component.prototype.isReactComponent // special property
+        )
+    );
 }
 
 /*
@@ -25,11 +57,11 @@ function isFunctionalComponent(Component) {
  */
 
 function isClassComponent(Component) {
-  return !!(
-    typeof Component === 'function'
-    && Component.prototype
-    && Component.prototype.isReactComponent
-  );
+    return !!(
+        typeof Component === 'function'
+        && Component.prototype
+        && Component.prototype.isReactComponent
+    );
 }
 
 /*
@@ -38,10 +70,10 @@ function isClassComponent(Component) {
  */
 
 function getFunctionName(fun) {
-  var ret = fun.toString();
-  ret = ret.substr('function '.length);
-  ret = ret.substr(0, ret.indexOf('('));
-  return ret;
+    var ret = fun.toString();
+    ret = ret.substr('function '.length);
+    ret = ret.substr(0, ret.indexOf('('));
+    return ret;
 }
 
 /*
@@ -57,13 +89,14 @@ function getComponentName(component) {
 
 /*
  * Create the debug element.
- * Parse window.RS_DEBUG to tell weather or not to inject the Debug element,
+ * Parse sessionStorage.getItem("RS_DEBUG") to tell weather or not to inject the Debug element,
  * otherwise return null.
  */
 
 function getDebugElement(element, type) {
+    console.log("CHECKING DEBUG");
     var debug_element, name;
-    if (window.RS_DEBUG) {
+    if (sessionStorage.getItem("RS_DEBUG") == "true") {
         if (type == "function") {
             name = getFunctionName(element);
             debug_element = React.createElement(Debug, {
@@ -89,26 +122,23 @@ PUBLIC
  * saftey and injects debug elements when configured.
  *
  * Elements are wrapped in a <div>. First child is a Debug element if
- * window.RS_DEBUG == true.
+ * sessionStorage.getItem("RS_DEBUG") == true.
  */
 
 function createElement(element, props, ...children) {
     if (typeof(element) == "string") {
-        console.log("GOT STRING: ");
         return React.createElement("div", {},
             getDebugElement(element, "function"),
             React.createElement(element, props, children),
         );
     }
     if (isFunctionalComponent(element)) {
-        console.log("GOT FUNCTOIN:");
         return React.createElement("div", {},
             getDebugElement(element, "function"),
             React.createElement(element, props, children),
         );
     }
     if (isClassComponent(element)) {
-        console.log("GOT COMPONENT");
         return React.createElement("div", {},
             getDebugElement(element, "component"),
             React.createElement(element, props, children),

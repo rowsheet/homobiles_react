@@ -163,10 +163,21 @@ class App extends React.Component {
         return (
 <div>
     { this.tempViewToggle(true) }
+    { this.devTools() }
     <LayoutWithSidebar {...this.state }>
     </LayoutWithSidebar>
 </div>
         );
+    }
+
+    devTools() {
+        return (
+            <button style={{position: "absolute",right: "0px",
+                top: "19px",zIndex: "1000000"}}
+                onClick={ window.RSDB }>
+            Debug 
+            </button>
+        )
     }
 
     /*----------------------------------------------------------------------
