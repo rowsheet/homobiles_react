@@ -1,3 +1,5 @@
+import SETTINGS from '../settings';
+
 export default class PageTitle extends React.Component {
 
     constructor(props) {
@@ -6,7 +8,10 @@ export default class PageTitle extends React.Component {
 
     render() {
         return (
-            <h2 style={ style }>
+            <h2 style={{ ...style, ...{
+                fontWeight: (this.props.bold ? "bold" : "unset"),
+                textAlign: (this.props.centered ? "center": "unset"),
+            }}}>
                 { this.props.value }
             </h2>
         );
@@ -14,7 +19,7 @@ export default class PageTitle extends React.Component {
 }
 
 var style = {
-    background: "red",
-    height: "100px",
-    width: "100%"
+    width: "100%",
+    margin: "0px",
+    paddingBottom: SETTINGS.SPACING.row_item_spacing,
 }

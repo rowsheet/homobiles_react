@@ -1,3 +1,5 @@
+import SETTINGS from '../settings';
+
 export default class SubText extends React.Component {
 
     constructor(props) {
@@ -6,16 +8,20 @@ export default class SubText extends React.Component {
 
     render() {
         return (
-            <h5 style={ style }>
+            <h4 style={{ ...style, ...{
+                fontWeight: (this.props.bold ? "bold" : "unset"),
+                textAlign: (this.props.centered ? "center": "unset"),
+            }}}>
                 { this.props.value }
-            </h5>
+            </h4>
         );
     }
 
 }
 
 var style = {
-    background: "blue",
-    height: "100px",
-    width: "100%"
+    width: "100%",
+    margin: "0px",
+    color: SETTINGS.COLORS.sub_text,
+    paddingBottom: SETTINGS.SPACING.row_item_spacing,
 }
