@@ -5,6 +5,7 @@ import React from "react";
 import LayoutWithSidebar from './common/LayoutWithSidebar';
 // DEMO
 import DemoMapForm from './views/DemoMapForm';
+import DemoItemList from './views/DemoItemList';
 // RIDER
 import RiderSidebar from './views/RiderSidebar';
 import RiderFoo from './views/RiderFoo';
@@ -102,6 +103,10 @@ class App extends React.Component {
                 config.main_content = DemoMapForm;
                 config.sidebar_content = RiderSidebar;
                 return config;
+            case "DEMO_ITEM_LIST":
+                config.main_content = DemoItemList;
+                config.sidebar_content = RiderSidebar;
+                return config;
             /***************************************************************
              * RIDER 
              **************************************************************/
@@ -170,9 +175,9 @@ class App extends React.Component {
             <select value={this.state.app_view}
                 onChange={this.tempViewToggle}
                 style={{ position: "absolute", zIndex: "1" }}>{[
-                    // COMMON
                     // DEMO
                     "DEMO_MAP_FORM",
+                    "DEMO_ITEM_LIST",
                     // RIDER
                     "INITIAL_SCREEN",
                     "RIDER_FOO",
@@ -189,8 +194,7 @@ class App extends React.Component {
     }
 }
 
-setTimeout(() =>
-    ReactDOM.render(
-         <App name="Homobiles" />,
-         document.getElementById('App')
-    ), 1000);
+ReactDOM.render(
+     <App name="Homobiles" />,
+     document.getElementById('App')
+);

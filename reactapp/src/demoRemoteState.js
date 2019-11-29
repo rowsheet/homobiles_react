@@ -3,7 +3,65 @@ var demoRemoteState = {
      * DEMO
     --------------------------------------------------------------------------*/
     DemoItemList: {
-        // @TODO Build the data structures first.
+        use_border: true,
+        use_thumbnail: true,
+        use_button: true,
+        items: [
+            {
+                type: "item",
+                title: "Title Foo PLUS SOME REALLY LONG TEXT TO OVERFLOW",
+                sub_title: "Sub-Title Foo PLUS SOME REALLY LONG TEXT TO OVERFLOW",
+                thumbnail: {
+                    type: "fa_icon",
+                    data: "fa-road",
+                },
+                button: {
+                    icon: "fa-plus",
+                    text: "expand",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Bar",
+                sub_title: "Sub-Title Bar",
+                thumbnail: {
+                    type: "letters",
+                    data: "A",
+                },
+                button: {
+                    icon: "fa-plus",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Baz",
+                sub_title: "Sub-Title Baz",
+                thumbnail: {
+                    type: "image",
+                    data: "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "spacer",
+                title: "Spacer",
+            },
+        ],
     },
     /*--------------------------------------------------------------------------
      * RIDER
