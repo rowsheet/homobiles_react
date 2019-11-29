@@ -58,14 +58,10 @@ export class Item extends React.Component {
     }
 
     style() {
-        if (this.props.use_border == true) {
-            return {
-                display: "flex",
-                borderBottom: "1px solid #ccc",
-                padding: "5px",
-            };
+        if (this.props.use_border) {
+            itemStyle = {...itemStyle, borderBottom: "1px solid #ccc"};
         }
-        return {};
+        return itemStyle;
     }
 
     render() {
@@ -79,6 +75,11 @@ export class Item extends React.Component {
                 ...listItemCenterStyle,
                 color: SETTINGS.COLORS.pink,
             }
+        } else {
+            listItemCenterStyle = {
+                ...listItemCenterStyle,
+                color: "black",
+            }
         }
         var center = this.center();
         return (
@@ -90,6 +91,12 @@ export class Item extends React.Component {
         );
     }
 }
+
+var itemStyle = {
+    display: "flex",
+    padding: "5px",
+}
+
 var flexTextStyle = {
     margin: "0px",
     textOverflow: "ellipsis",
