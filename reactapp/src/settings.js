@@ -5,7 +5,6 @@ var COLORS = {
 var SidebarProfileHeader = {
     style: {
         background: `linear-gradient(-45deg, ${COLORS.purple}, ${COLORS.pink})`,
-        height: "227px",
     },
     default_image: "...",
     default_image_text: "add a photo!",

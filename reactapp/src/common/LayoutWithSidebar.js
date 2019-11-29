@@ -73,6 +73,8 @@ export class LayoutWithSidebar extends React.Component {
         <div className="rs_main_content" style={{
             background: "white",
             height: "100vh",
+            position: "absolute",
+            width: "100%",
         }}>
             { RowSheet.createElement(this.props.main_content, this.props) }
         </div>

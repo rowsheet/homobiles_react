@@ -36,28 +36,21 @@ export class SidebarItems extends React.Component {
     render () {
         var footer = this.footer();
         return (
-<div id="SidebarItems">
-    <ul style={{
-        listStyleType: "none",
-        padding: "0px",
-        paddingTop: "18px",
-    }}>
-        { this.props.items.map(item => (
-            <li className={ item.active ? "pink title_text" : "" } style={{
-                padding: "7px",
-                paddingLeft: "31px",
-                fontSize: "16px",
-                paddingBottom: "8px",
-            }}>
-                <i className={ "fa " + item.icon } style={{
-                    width: "50px",
-                    fontSize: "25px",
-                    verticalAlign: "middle",
-                }}></i>
-                { item.title }
-            </li>
-        )) }
-    </ul>
+<div id="SidebarItems" style={{
+    margin: "auto",
+    padding: "25px",
+}}>
+    { this.props.items.map(item => (
+        <div className={ item.active ? "pink title_text" : "" }>
+            <i className={ "fa " + item.icon } style={{
+                width: "50px",
+                fontSize: "25px",
+                verticalAlign: "middle",
+                paddingTop: "10px",
+            }}></i>
+            { item.title }
+        </div>
+    )) }
     { footer }
 </div>
         );

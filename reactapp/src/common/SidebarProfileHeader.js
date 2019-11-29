@@ -10,28 +10,36 @@ export class SidebarProfileHeader extends React.Component {
         return (
 <div id="SidebarProfileHeader" style={{
     ...SETTINGS.SidebarProfileHeader.style, ...{
+    height: "fit-content",
     padding: "15px",
     textAlign: "center",
 }}}>
     <div id="SidebarProfileHeader_photo" style={{
-        width: "125px",
-        height: "125px",
-        background: "#D8D8D8",
+        background: "rgb(216, 216, 216)",
         margin: "auto",
-        borderRadius: "100px",
+        position: "relative",
+        width: "50%",
+        paddingBottom: "50%",
+        borderRadius: "100%",
+        height: "0",
     }}>
         <p className="title_text white" style={{
-            paddingTop: "41px",
-            width: "50px",
+            width: "100%",
             margin: "auto",
+            position: "absolute",
+            top: "calc(50% - 10px)",
+            height: "10px",
         }}>{ SETTINGS.SidebarProfileHeader.default_image_text }</p>
     </div>
     <h4 className="title_text white" style={{
         margin: "0px",
-        marginTop: "15px",
+        marginTop: "5px",
     }}>
             { this.props.username }</h4>
-    <p className="white">
+    <p className="white" style={{
+        margin: "0px",
+        marginTop: "5px",
+    }}>
             { this.props.pronouns }</p>
 </div>
         );

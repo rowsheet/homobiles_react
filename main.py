@@ -14,10 +14,6 @@ def index():
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="stylesheet" href="/static/bootstrap.min.css">
-<script src="/static/jquery.min.js"></script>
-<script src="/static/popper.min.js"></script>
-<script src="/static/bootstrap.min.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=%(GOOGLE_MAPS_API_KEY)s"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -26,9 +22,10 @@ def index():
 <style>
 body {
     background: #eee;
+    margin: 0px;
 }
 div#App {
-    background: lightgray;
+    background: white;
     max-width: 500px;
     margin: auto;
     height: 100vh;
@@ -40,44 +37,29 @@ div#app_loading {
     padding-top: 40vh;
     text-align: center;
 }
-div#app_loading * {
+div#app_loading_spinner {
     display: inline-block;
-    font-size: 30px;
-    color: white;
+    border: 25px solid #ffabc8;
+    border-top: 25px solid #ff4d8a;
+    border-radius: 50%%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.5s linear infinite;
 }
-* {
-    font-family: 'Nunito', sans-serif;
-}
-*.light_text {
-    font-weight: 200;
-}
-* {
-    font-weight: 400;
-}
-*.title_text {
-    font-weight: 700;
-}
-*.white {
-    color: white;
-}
-*.pink {
-    color: #FF4F8A;
+@keyframes spin {
+  0%% { transform: rotate(0deg); }
+  100%% { transform: rotate(360deg); }
 }
 </style>
 
     </head>
     <body>
-    <div class="container">
-    <div class="row">
-    <div class="col-12 p-0">
         <div id="App">
             <div id="app_loading">
-                <i class="fas fa-sync fa-spin"></i>
-                <h1>Loading...</h1>
+                <div id="app_loading_spinner">
+                </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>

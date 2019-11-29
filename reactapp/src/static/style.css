@@ -1,0 +1,18 @@
+* {
+    font-family: 'Nunito', sans-serif;
+}
+*.light_text {
+    font-weight: 200;
+}
+* {
+    font-weight: 400;
+}
+*.title_text {
+    font-weight: 700;
+}
+*.white {
+    color: white;
+}
+*.pink {
+    color: #FF4F8A;
+}

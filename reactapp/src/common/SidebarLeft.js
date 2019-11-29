@@ -10,8 +10,9 @@ export class SidebarLeft extends React.Component {
         var style = {
             background: this.props.sidebar_background,
             position: "absolute",
-            width: "300px",
-            height: "100vh",
+            width: "75%",
+            height: "100%",
+            maxWidth: "300px",
         }
         if (this.props.sidebar_open == true) {
             style.mgainLeft = "-300px";
@@ -22,10 +23,10 @@ export class SidebarLeft extends React.Component {
     overlay_style() {
         var style = {
             width: "100%",
-            height: "100vh",
+            height: "100%",
             background: "#0000004d",
             position: "absolute",
-            zIndex: "1",
+            zIndex: "1000",
             display: "none",
         }
         if (this.props.sidebar_open == true) {
