@@ -1,5 +1,8 @@
+import os
 from flask import Flask, request, send_from_directory, redirect
 app = Flask(__name__, static_url_path='')
+
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 @app.route('/')
 def index():
@@ -16,9 +19,9 @@ def index():
 <script src="/static/popper.min.js"></script>
 <script src="/static/bootstrap.min.js"></script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=%(GOOGLE_MAPS_API_KEY)s"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,400,700&display=swap" rel="stylesheet">
-
 
 <style>
 body {
@@ -81,7 +84,9 @@ div#app_loading * {
 <script src="/reactapp/main.js"></script>
     </body>
 </html>
-    """
+    """ % {
+        "GOOGLE_MAPS_API_KEY": GOOGLE_MAPS_API_KEY,
+    }
 
 @app.route('/reactapp/<path:path>')
 def reactapp(path):

@@ -22,7 +22,8 @@ import RiderSidebar from './views/RiderSidebar';
 import Foo from './views/Foo';
 import Bar from './views/Bar';
 import Baz from './views/Baz';
-import CoverContentLayout from './views/CoverContentLayout';
+import CoverContentLayout from './common/CoverContentLayout';
+import MapForm from './common/MapForm';
 
 /*--------------------------------------------------------------------------
  ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ ██████╗ ███╗   ██╗
@@ -198,6 +199,10 @@ class App extends React.Component {
                 config.main_content = CoverContentLayout;
                 config.sidebar_content = RiderSidebar;
                 return config;
+            case "TEMP_MAP_FORM":
+                config.main_content = MapForm;
+                config.sidebar_content = RiderSidebar;
+                return config;
             case "FOO":
                 config.main_content = Foo;
                 config.sidebar_content = RiderSidebar;
@@ -263,9 +268,10 @@ class App extends React.Component {
             return (
             <select value={this.state.app_view}
                 onChange={this.tempViewToggle}
-                style={{ position: "absolute" }}>{[
+                style={{ position: "absolute", zIndex: "1" }}>{[
                     "INITIAL_SCREEN",
                     "TEMP_COVER_CONTENT_LAYOUT",
+                    "TEMP_MAP_FORM",
                     "FOO",
                     "FOO_1",
                     "FOO_2",

@@ -25,6 +25,7 @@ export class MobileSidebar extends React.Component {
             height: "100vh",
             background: "#0000004d",
             position: "absolute",
+            zIndex: "1",
             display: "none",
         }
         if (this.props.sidebar_open == true) {

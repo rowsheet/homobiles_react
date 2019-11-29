@@ -66,6 +66,7 @@ export class MobileLayout extends React.Component {
             padding: "15px",
             position: "absolute",
             fontSize: "25px",
+            zIndex: "1",
         }}
             onClick={ this.handle_layout_back_button }></i>
 
