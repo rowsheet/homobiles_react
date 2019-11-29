@@ -2,3 +2,4 @@ __pycache__
 reactapp/node_modules
 reactapp/dist
 .env
+reactapp/src/common/BASE.js

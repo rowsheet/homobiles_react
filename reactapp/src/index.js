@@ -7,6 +7,7 @@ import LayoutWithSidebar from './common/LayoutWithSidebar';
 import DemoMapForm from './views/DemoMapForm';
 import DemoItemList from './views/DemoItemList';
 // RIDER
+import RiderVerificationScreen from './views/RiderVerificationScreen';
 import RiderSidebar from './views/RiderSidebar';
 import RiderFoo from './views/RiderFoo';
 import RiderBar from './views/RiderBar';
@@ -114,6 +115,10 @@ class App extends React.Component {
                 config.main_content = () => (<h1>initial screen content</h1>);
                 config.sidebar_content = RiderSidebar;
                 return config;
+            case "RIDER_VERIFICATION_SCREEN":
+                config.main_content = RiderVerificationScreen;
+                config.sidebar_content = RiderSidebar;
+                return config;
             case "RIDER_FOO":
                 config.main_content = RiderFoo;
                 config.sidebar_content = RiderSidebar;
@@ -174,11 +179,12 @@ class App extends React.Component {
             return (
             <select value={this.state.app_view}
                 onChange={this.tempViewToggle}
-                style={{ position: "absolute", zIndex: "1" }}>{[
+                style={{ position: "absolute", zIndex: "1", right: "0px" }}>{[
                     // DEMO
                     "DEMO_MAP_FORM",
                     "DEMO_ITEM_LIST",
                     // RIDER
+                    "RIDER_VERIFICATION_SCREEN",
                     "INITIAL_SCREEN",
                     "RIDER_FOO",
                     "RIDER_FOO_1",

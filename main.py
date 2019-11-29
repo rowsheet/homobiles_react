@@ -3,12 +3,22 @@ from flask import Flask, request, send_from_directory, redirect
 app = Flask(__name__, static_url_path='')
 
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+RENDER_MODES = [
+    "DEBUG",
+    "DEBUG_VERBOSE",
+    # "DEBUG",
+    # "DEBUG_VERBOSE",
+    # "DEBUG_VERBOSE_BORDER_TOP",
+    # "DEBUG_VERBOSE_BORDER_BOTTOM",
+]
 
 @app.route('/')
 def index():
     return """
 <html>
     <head>
+
+%(RS_DEBUG)s
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,7 +63,7 @@ div#app_loading_spinner {
 </style>
 
     </head>
-    <body>
+    <body class="%(RENDER_MODES)s">
         <div id="App">
             <div id="app_loading">
                 <div id="app_loading_spinner">
@@ -68,6 +78,8 @@ div#app_loading_spinner {
 </html>
     """ % {
         "GOOGLE_MAPS_API_KEY": GOOGLE_MAPS_API_KEY,
+        "RENDER_MODES": " ".join(RENDER_MODES),
+        "RS_DEBUG": "<script>window.RS_DEBUG = true;</script>" if "DEBUG" in RENDER_MODES else ""
     }
 
 @app.route('/reactapp/<path:path>')
