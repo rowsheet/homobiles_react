@@ -7,8 +7,12 @@ import LayoutWithSidebar from './common/LayoutWithSidebar';
 import DemoMapForm from './views/DemoMapForm';
 import DemoItemList from './views/DemoItemList';
 import DemoFormInputs from './views/DemoFormInputs';
+import DemoFormGroups from './views/DemoFormGroups';
 // RIDER
 import RiderVerificationScreen from './views/RiderVerificationScreen';
+import RiderVerificationScreenConfirm from './views/RiderVerificationScreenConfirm';
+import RiderMainScreen from './views/RiderMainScreen';
+import RiderSetLocation from './views/RiderSetLocation';
 import RiderSidebar from './views/RiderSidebar';
 import RiderFoo from './views/RiderFoo';
 import RiderBar from './views/RiderBar';
@@ -113,6 +117,10 @@ class App extends React.Component {
                 config.main_content = DemoFormInputs;
                 config.sidebar_content = RiderSidebar;
                 return config;
+            case "DEMO_FORM_GROUPS":
+                config.main_content = DemoFormGroups;
+                config.sidebar_content = RiderSidebar;
+                return config;
             /***************************************************************
              * RIDER 
              **************************************************************/
@@ -122,6 +130,18 @@ class App extends React.Component {
                 return config;
             case "RIDER_VERIFICATION_SCREEN":
                 config.main_content = RiderVerificationScreen;
+                config.sidebar_content = RiderSidebar;
+                return config;
+            case "RIDER_VERIFICATION_SCREEN_CONFIRM":
+                config.main_content = RiderVerificationScreenConfirm;
+                config.sidebar_content = RiderSidebar;
+                return config;
+            case "RIDER_MAIN_SCREEN":
+                config.main_content = RiderMainScreen;
+                config.sidebar_content = RiderSidebar;
+                return config;
+            case "RIDER_SET_LOCATION":
+                config.main_content = RiderSetLocation;
                 config.sidebar_content = RiderSidebar;
                 return config;
             case "RIDER_FOO":
@@ -200,8 +220,12 @@ class App extends React.Component {
                     "DEMO_MAP_FORM",
                     "DEMO_ITEM_LIST",
                     "DEMO_FORM_INPUTS",
+                    "DEMO_FORM_GROUPS",
                     // RIDER
                     "RIDER_VERIFICATION_SCREEN",
+                    "RIDER_VERIFICATION_SCREEN_CONFIRM",
+                    "RIDER_MAIN_SCREEN",
+                    "RIDER_SET_LOCATION",
                     "INITIAL_SCREEN",
                     "RIDER_FOO",
                     "RIDER_FOO_1",

@@ -94,7 +94,6 @@ function getComponentName(component) {
  */
 
 function getDebugElement(element, type) {
-    console.log("CHECKING DEBUG");
     var debug_element, name;
     if (sessionStorage.getItem("RS_DEBUG") == "true") {
         if (type == "function") {

@@ -16,6 +16,7 @@ var THEME = {
     input_font_size: "1.1rem",
     input_padding: "7px",
     input_icon_padding: "10px",
+    input_border_radius: "15px",
 }
 var SPACING = {
     row_item_spacing: "20px",

@@ -7,23 +7,15 @@ import RowSheet from '../rowsheet';
 import SETTINGS from '../settings';
 import Debug from '../debug';
 
-function Foo(props) {
-    return (
-        <h1>
-            Foo: { props.name }
-        </h1>
-    );
-}
-
-export default class RiderVerificationScreen extends React.Component {
+export default class RiderVerificationScreenConfirm extends React.Component {
 
     constructor(props) {
         super(props);
     }
 
     render() {
-        var page_title = "What’s your number?";
-        var sub_text = "We’ll text you a code to verify your phone";
+        var page_title = "Enter your code";
+        var sub_text = "Enter the verification code we sent you.";
         return RowSheet.createElement("div", { style: style },
             RowSheet.createElement(TitlePadding),
             RowSheet.createElement(PageTitle,
@@ -31,8 +23,7 @@ export default class RiderVerificationScreen extends React.Component {
             RowSheet.createElement(SubText,
                 { value: sub_text, centered: false }),
             // ICON_LEFT
-            RowSheet.createElement(TextInput, 
-                { iconLeft: "fa-phone", iconLeftBorder: "true" }),
+            RowSheet.createElement(TextInput),
         );
     }
 }

@@ -5,7 +5,9 @@ export default class TitlePadding extends React.Component {
     }
 
     render() {
-        return React.createElement("div", { style: style });
+        return React.createElement("div", { style: {...style, ...{
+            height: this.props.height || style.height,
+        }}});
     }
 
 }

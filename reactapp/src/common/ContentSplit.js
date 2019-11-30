@@ -7,6 +7,8 @@ export class ContentSplit extends React.Component {
     }
 
     render() {
+        console.log("ContentSplit");
+        console.log(this.props);
         return (
 <div id="ContentSplit" style={{
     display: "flex",
@@ -20,9 +22,7 @@ export class ContentSplit extends React.Component {
     }}>
         { RowSheet.createElement(this.props.top) }
     </div>
-    <div id="ContentSplit_bottom" style={{
-        background: "lightblue",
-    }}>
+    <div id="ContentSplit_bottom">
         { RowSheet.createElement(this.props.bottom) }
     </div>
 </div>

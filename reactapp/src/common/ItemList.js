@@ -19,10 +19,7 @@ export class ItemList extends React.Component {
             }}));
         return (
 <div id="ItemList">
-    <h1>
-        List
-    </h1>
-            { items }
+    { items }
 </div>
         );
     }

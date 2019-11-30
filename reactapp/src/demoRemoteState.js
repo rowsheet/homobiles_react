@@ -42,6 +42,10 @@ var demoRemoteState = {
                 },
             },
             {
+                type: "spacer",
+                title: "Spacer",
+            },
+            {
                 type: "item",
                 title: "Title Only",
                 thumbnail: {
@@ -51,7 +55,23 @@ var demoRemoteState = {
             },
             {
                 type: "item",
-                title: "Title Only",
+                title: "Title Only 1",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only 2",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only 3",
                 thumbnail: {
                     type: "letters",
                     data: "TO",
@@ -60,6 +80,46 @@ var demoRemoteState = {
             {
                 type: "spacer",
                 title: "Spacer",
+            },
+            {
+                type: "item",
+                title: "Title Only 4",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only 5",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only 6",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only 7",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
+            },
+            {
+                type: "item",
+                title: "Title Only 8",
+                thumbnail: {
+                    type: "letters",
+                    data: "TO",
+                },
             },
         ],
     },
