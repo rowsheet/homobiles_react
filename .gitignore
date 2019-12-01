@@ -1,5 +1,8 @@
-__pycache__
-reactapp/node_modules
-reactapp/dist
+venv
+*.pyc
+staticfiles
 .env
-reactapp/src/common/BASE.js
+db.sqlite3
+dump.sql
+.DS_store
+reactapp/node_modules

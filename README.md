@@ -1,15 +1,21 @@
-# Homobiles (developed by RowSheet)
+# Homobiles Application (by RowSheet)
 
-### Run Dev:
+App developed by RowSheet LLC for Homobiles.
 
-Hot Re-Load Flask:
+Homobiles licensing and legal agreements yet to be finalized. All RowSheet Rights Reserved.
 
-    FLASK_APP=main.py FLASK_DEBUG=1 python -m flask run --port 5001
+> © 2019-present, Alexander Kleinhans
+>
+> All Rights Reserved
 
-Hot Re-Load Webpack:
+## By RowSheet, LLC
 
-    webpack --config webpack.config.js --watch
-
-Figure all the other shit out yourself
-
-## By RowSheet
+> Company:    RowSheet, LLC 
+>
+> Contact:    alex@rowsheet.com
+>
+> Website:  [rowsheet.com](https://rowsheet.com/)
+>
+> Address:    312 Cheyenne St. Denver, CO 80403
+>
+> [Github](https://github.com/rowsheet)

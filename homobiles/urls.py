@@ -1,6 +1,12 @@
 import os, json
-from flask import Flask, request, send_from_directory, redirect, Response
-app = Flask(__name__, static_url_path='')
+from django.urls import path, include
+from django.conf.urls import url
+from django.contrib import admin
+from django.views.decorators.csrf import csrf_exempt
+
+admin.autodiscover()
+
+from django.http import HttpResponse, JsonResponse
 
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 RENDER_MODES = [
@@ -10,9 +16,10 @@ RENDER_MODES = [
     # "DEBUG_VERBOSE",
 ]
 
-@app.route('/')
-def index():
-    return """
+def index(request):
+    # TEMP: Make sure staff status since this is still testing.
+    if request.user.is_authenticated and request.user.is_staff:
+        return HttpResponse("""
 <html>
     <head>
 
@@ -71,69 +78,57 @@ div#app_loading_spinner {
     </div>
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-<script src="/reactapp/main.js"></script>
+<script src="/static/dist/main.js"></script>
     </body>
 </html>
-    """ % {
-        "GOOGLE_MAPS_API_KEY": GOOGLE_MAPS_API_KEY,
-        "RENDER_MODES": " ".join(RENDER_MODES),
-        "RS_DEBUG": """
-        <script>
-            window.RS_DEBUG = true;
-            sessionStorage.setItem("RS_DEBUG", true);
-        </script>""" if "DEBUG" in RENDER_MODES else """
-        <script>
-            window.RS_DEBUG = true;
-            sessionStorage.setItem("RS_DEBUG", false);
-        </script>"""
-    }
+        """ % {
+            "GOOGLE_MAPS_API_KEY": GOOGLE_MAPS_API_KEY,
+            "RENDER_MODES": " ".join(RENDER_MODES),
+            "RS_DEBUG": """
+            <script>
+                window.RS_DEBUG = true;
+                sessionStorage.setItem("RS_DEBUG", true);
+            </script>""" if "DEBUG" in RENDER_MODES else """
+            <script>
+                window.RS_DEBUG = true;
+                sessionStorage.setItem("RS_DEBUG", false);
+            </script>"""
+        })
+    else:
+        return HttpResponse("""
+                <p>You're logged out</p>
+                <a href="/accounts/login">login</a>
+        """)
 
 #-------------------------------------------------------------------------------
 # An example API route that sleeps for 1 second to simulate network latency.
 # Simply tests weather input value == 'test'.
 # Returns a Promise by calling either `resolve()` or `reject()`.
 #-------------------------------------------------------------------------------
-@app.route('/api_test/', methods=['GET', 'POST'])
-def api_test():
+@csrf_exempt
+def api_test(request):
 
     # Sleep for 1 second to simulate latency.
     import time
     time.sleep(1)
 
     # Parse request args.
-    args = json.loads(request.data.decode('utf-8'))
+    args = json.loads(request.body.decode('utf-8'))
     value = args.get("value")
 
     # Check request had value == "test" and return response.
     if value == "test":
-        return Response(
-            json.dumps({
+        return JsonResponse({
                 "data": ("OK GOT '%s'" % str(value))
-            }),
-            status=200,
-            mimetype='application/json')
+            },status=200)
     else:
-        return Response(
-            json.dumps({
+        return JsonResponse({
                 "data": ("BAD GOT '%s'" % str(value))
-            }),
-            status=400,
-            mimetype='application/json')
+            },status=400)
 
-@app.route('/reactapp/<path:path>')
-def reactapp(path):
-    return send_from_directory('reactapp/dist/', path)
-
-@app.route('/static/<path:path>')
-def serve_static(path):
-    return send_from_directory('static/', path)
-
-@app.errorhandler(404)
-def catchall(e):
-    return redirect("/", 302)
-
-if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=5001,
-    )
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    url(r"^accounts/", include("allauth.urls")),
+    path("", index),
+    path("api_test/", api_test),
+]

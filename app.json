@@ -1,0 +1,15 @@
+{
+    "name": "Homobiles",
+    "description": "Homobiles App (by RowSheet)",
+    "image": "heroku/python",
+    "repository": "https://github.com/rowsheet/homobiles_app",
+    "keywords": ["homobiles", "by rowsheet"],
+    "addons": [ "heroku-postgresql" ],
+    "copyright": {
+        "year": 2019,
+        "author": "Alexander Kleinhans",
+        "company", "RowSheet LLC",
+        "contact": "alex@rowsheet.com",
+        "website": "www.rowsheet.com"
+    }
+}
