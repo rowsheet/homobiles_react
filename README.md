@@ -9,22 +9,16 @@ Note: You need the `nodejs` buildpack for `webpack` to build as well as the `pyt
 
 # Legal
 
-App developed by RowSheet LLC for Homobiles.
-
+App developed by RowSheet LLC for Homobiles.  
 Homobiles licensing and legal agreements yet to be finalized. All RowSheet Rights Reserved.
 
-> © 2019-present, Alexander Kleinhans
->
-> All Rights Reserved
+> © 2019-present, Alexander Kleinhans  
+> All Rights Reserved  
 
 ## By RowSheet, LLC
 
-> Company:    RowSheet, LLC 
->
-> Contact:    alex@rowsheet.com
->
-> Website:  [rowsheet.com](https://rowsheet.com/)
->
-> Address:    312 Cheyenne St. Denver, CO 80403
->
-> [Github](https://github.com/rowsheet)
+> Company:    RowSheet, LLC  
+> Contact:    alex@rowsheet.com  
+> Website:  [rowsheet.com](https://rowsheet.com/)  
+> Address:    312 Cheyenne St. Denver, CO 80403  
+> [Github](https://github.com/rowsheet)  
