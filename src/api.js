@@ -14,11 +14,14 @@ var Api = {
      */
     test: async function(value) {
         var promise = new Promise(function(resolve, reject) {
-            fetch("/api_test/", {
+            fetch("/api/v1/UG_Test/M_Test/C_Test/", {
                 method: "post",
                 body: JSON.stringify({
                     value: value,
                 }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }).then(
                 response => resolve(response),
                 error => reject(),

@@ -100,29 +100,12 @@ div#app_loading_spinner {
                 <a href="/accounts/login">login</a>
         """)
 
-#-------------------------------------------------------------------------------
-# Simply tests weather input value == 'test'.
-#-------------------------------------------------------------------------------
-@csrf_exempt
-def api_test(request):
-
-    # Parse request args.
-    args = json.loads(request.body.decode('utf-8'))
-    value = args.get("value")
-
-    # Check request had value == "test" and return response.
-    if value == "test":
-        return JsonResponse({
-                "data": ("OK GOT '%s'" % str(value))
-            },status=200)
-    else:
-        return JsonResponse({
-                "data": ("BAD GOT '%s'" % str(value))
-            },status=400)
+from .api import API 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     url(r"^accounts/", include("allauth.urls")),
     path("", index),
-    path("api_test/", api_test),
+    # API V1
+    url(r"^api", API),
 ]
