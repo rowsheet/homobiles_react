@@ -5,5 +5,5 @@ staticfiles
 db.sqlite3
 dump.sql
 .DS_store
-reactapp/node_modules
+node_modules
 webpack.nohup
