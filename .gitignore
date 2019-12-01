@@ -6,3 +6,4 @@ db.sqlite3
 dump.sql
 .DS_store
 reactapp/node_modules
+webpack.nohup

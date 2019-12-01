@@ -61,7 +61,14 @@ create_staging_superuser: set_staging_env; $(info $(M) Creating super-user on st
 # LOCAL
 #-------------------------------------------------------------------------------
 
-run_local: ; $(info $(M) Running local server...)
+webpack_watch_local: ; $(info $(M) Running local webpack with --watch...)
+	# Everhthing in bash is FUCKING NIGHTMARE
+	cd reactapp && \
+		pwd && \
+		nohup webpack --mode development --config webpack.config.js --watch > ../webpack.nohup &
+	echo WEBPACK 
+
+run_local: webpack_watch_local ; $(info $(M) Running local server...)
 	env \
 		DATABASE_URL=$(DATABASE_URL) \
 		DEBUG=$(DEBUG) \

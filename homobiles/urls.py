@@ -101,16 +101,10 @@ div#app_loading_spinner {
         """)
 
 #-------------------------------------------------------------------------------
-# An example API route that sleeps for 1 second to simulate network latency.
 # Simply tests weather input value == 'test'.
-# Returns a Promise by calling either `resolve()` or `reject()`.
 #-------------------------------------------------------------------------------
 @csrf_exempt
 def api_test(request):
-
-    # Sleep for 1 second to simulate latency.
-    import time
-    time.sleep(1)
 
     # Parse request args.
     args = json.loads(request.body.decode('utf-8'))
