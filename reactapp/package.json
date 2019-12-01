@@ -4,6 +4,8 @@
   "description": "Homobiles ReactJS App",
   "main": "webpack.config.js",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/runtime": "^7.7.4",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "package.json": "^2.0.1",

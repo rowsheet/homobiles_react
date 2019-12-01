@@ -1,17 +1,31 @@
 import SETTINGS from '../../settings';
 
 export default class TextInput extends React.Component {
-
-    constructor(props) {
+    
+    constructor(props = {}) {
         super(props);
+        this.state = {
+            value: this.props.value,
+        };
+        this.handleOnChange = this.handleOnChange.bind(this);
     }
 
     inputLeft() {
         if (this.props.iconLeft) {
             var inputIconLeftStyle = _inputIconLeftStyle(this.props);
+            var iconLeft;
+            if (this.props.iconLeftType == "text") {
+                iconLeft = (
+                    <div className="textIcon" style={ textIconStyle }>
+                        { this.props.iconLeft }
+                    </div>
+                );
+            } else { 
+                iconLeft = (<i className={ "fas " + this.props.iconLeft }></i>);
+            }
             return (
                 <div className="inputIcon" style={ inputIconLeftStyle }>
-                    <i className={ "fas " + this.props.iconLeft }></i>
+                    { iconLeft }
                 </div>
             );
         }
@@ -20,15 +34,36 @@ export default class TextInput extends React.Component {
     inputRight() {
         if (this.props.iconRight) {
             var inputIconRightStyle = _inputIconRightStyle(this.props);
+            var iconRight;
+            if (this.props.iconRightType == "text") {
+                iconRight = (
+                    <div className="textIcon" style={ textIconStyle }>
+                        { this.props.iconRight }
+                    </div>
+                )
+            } else {
+                iconRight = (<i className={ "fas " + this.props.iconRight }></i>);
+            }
             return (
                 <div className="inputIcon" style={ inputIconRightStyle }>
-                    <i className={ "fas " + this.props.iconRight }></i>
+                    { iconRight }
                 </div>
             );
         }
     }
 
-    render_ICON_BOTH() {
+    handleOnChange(event) {
+        console.log("change...");
+        console.log(event.target.value);
+        this.setState({...this.state, ...{
+            value: event.target.value,
+        }});
+        if (this.props.onChange) {
+            this.props.onChange(event);
+        }
+    }
+
+    render() {
         var inputLeft = this.inputLeft();
         var inputRight = this.inputRight();
         var inputStyle = _inputStyle(this.props);
@@ -37,18 +72,23 @@ export default class TextInput extends React.Component {
             <div>
                 <div className="inputBorderWrap" style={ inputBorderWrapStyle }>
                     { inputLeft }
-                    <input type={ "text" } style={ inputStyle }></input>
+                    <input type={ "text" } style={ inputStyle }
+                        placeholder={ this.props.placeholder }
+                        value={ this.state.value }
+                        onChange={ event => this.handleOnChange(event) }
+                    ></input>
                     { inputRight }
                 </div>
             </div>
         );
     }
 
-    render() {
-        return this.render_ICON_BOTH();
-    }
-
 }
+
+var textIconStyle = {
+    fontSize: "13px",
+    textAlign: "center",
+};
 
 function _inputBorderWrapStyle(props) {
     var style = {

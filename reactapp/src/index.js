@@ -2,6 +2,8 @@ import './static/style.css';
 
 import React from "react";
 
+import Api from "./api";
+
 import LayoutWithSidebar from './common/LayoutWithSidebar';
 // DEMO
 import DemoMapForm from './views/DemoMapForm';
@@ -59,12 +61,23 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
+        /*----------------------------------------------------------------------
+        METHOD BINDERS
+        ----------------------------------------------------------------------*/
         this.setAppView = this.setAppView.bind(this);
         this.handle_back_button = this.handle_back_button.bind(this);
         this._view_config = this._view_config.bind(this);
         this.tempViewToggle = this.tempViewToggle.bind(this);
+        this.updateState = this.updateState.bind(this);
 
-        /* INITIALIZE PERSISTANT STATE */
+        // API Handlers:
+
+        // Temp For: ASYNC_API_TEST
+        this.handle_test = this.handle_test.bind(this);
+
+        /*----------------------------------------------------------------------
+        INITIALIZE PERSISTANT STATE
+        ----------------------------------------------------------------------*/
         var stored_APP_STATE = GET_VALID_STORED_STATE();
         var stored_APP_STATE_app_view = stored_APP_STATE.app_view;
         var initial_VIEW_CONFIG = this.GET_INITIAL_VIEW_CONFIG(
@@ -92,6 +105,35 @@ class App extends React.Component {
         this.setAppView(back_view);
     }
 
+    updateState(state) {
+        // Do normal setState, but also save to persistent storage, in this
+        // case we are using sessionStorage.
+        this.setState(state);
+    }
+
+    // Temp For: ASYNC_API_TEST
+    handle_test(value) {
+
+        // Indicate loading.
+
+        this.updateState({ state_test: "LOADING..." });
+
+        // Load from the API (API returns promise).
+
+        Api.test(value).then(
+            function resolve(response) {
+                this.updateState({
+                        state_test: "RESOLVED: " + response,
+                });
+            }.bind(this),
+            function reject(response) {
+                this.updateState({
+                        state_test: "REJECTED: " + response,
+                });
+            }.bind(this)
+        );
+    }
+
     _view_config(app_view) {
         var config = {
             app_view: app_view,
@@ -100,6 +142,19 @@ class App extends React.Component {
             sidebar_background: "white",
             handle_back_button: false,
             sidebar_open: null,
+
+            /*------------------------------------------------------------------
+            API States
+            ------------------------------------------------------------------*/
+            // Temp For: ASYNC_API_TEST
+            state_test: "ORIGINAL",
+
+            /*------------------------------------------------------------------
+            API Handlers
+            ------------------------------------------------------------------*/
+
+            // Temp For: ASYNC_API_TEST
+            handle_test: this.handle_test
         }
         switch (app_view) {
             /***************************************************************
