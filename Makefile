@@ -61,10 +61,11 @@ create_staging_superuser: set_staging_env; $(info $(M) Creating super-user on st
 # LOCAL
 #-------------------------------------------------------------------------------
 
-webpack_watch_local: ; $(info $(M) Running local webpack with --watch...)
-	# Everhthing in bash is FUCKING NIGHTMARE
+install_node_modules: webpack_watch_local ; $(info $(M) Installing node_modules...)
+	cd reactapp && npm i
+
+webpack_watch_local: install_node_modules ; $(info $(M) Running local webpack with --watch...)
 	cd reactapp && \
-		pwd && \
 		nohup webpack --mode development --config webpack.config.js --watch > ../webpack.nohup &
 	echo WEBPACK 
 
