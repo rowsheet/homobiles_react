@@ -2,7 +2,7 @@ import os
 import django_heroku 
 import dj_database_url
 import dotenv
-from homobiles.util import parse_env
+from .env import PARSE_ENV
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be used, if set, instead)."
 
 # required BOOL, default False.
-DEBUG = parse_env("DEBUG", os.getenv("DEBUG"), data_type="bool",
+DEBUG = PARSE_ENV("DEBUG", os.getenv("DEBUG"), data_type="bool",
         default=False, required=True)
 
 ALLOWED_HOSTS = []

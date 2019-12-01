@@ -13,7 +13,7 @@ Note:
     The last parameter only matters for "string" type variables but allows
     REQUIRED variables to be valid if they are an empty string (versus) None.
 -----------------------------------------------------------------------------"""
-def parse_env(  name=None,      value=None,
+def PARSE_ENV(  name=None,      value=None,
                 default=None,   data_type="string",
                 required=False, empty_str_valid=False):
     #---------------------------------------
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         if empty_str_valid is None:
             empty_str_valid = True
         try:
-            parsed = parse_env(name, value, default, data_type, required, empty_str_valid)
+            parsed = PARSE_ENV(name, value, default, data_type, required, empty_str_valid)
             if error == True:
                 print("FAILED_ERROR:\n\t%s => %s" % (name, parsed))
                 return

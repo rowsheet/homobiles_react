@@ -53,6 +53,7 @@ run_curl("""
 curl -s localhost:5002/api/v1/UG_Test/M_Test/C_Test\
     -X POST \
     -u [TOKEN]: \
+    -d value="Value from TEST" \
     -d amount=2000 \
     -d currency=usd \
     -d description="Charge for jenny.rosen@example.com" \

@@ -1,7 +1,7 @@
-from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
-from .utils import PARSE_REQUEST
+from .request import PARSE_REQUEST
 
 #-------------------------------------------------------------------------------
 # API
@@ -25,7 +25,7 @@ def INVALID_API_REQUEST(ex):
 #-------------------------------------------------------------------------------
 
 def ROUTE_VERSION(REQUEST):
-    VERSION = REQUEST["VERSION"]
+    VERSION = REQUEST["ROUTE"]["VERSION"]
     if VERSION == "v1":
         return ROUTE_USER_GROUP(REQUEST)
     return INVALID_VERSION()
@@ -40,7 +40,7 @@ def INVALID_VERSION():
 #-------------------------------------------------------------------------------
 
 def ROUTE_USER_GROUP(REQUEST):
-    USER_GROUP = REQUEST["USER_GROUP"]
+    USER_GROUP = REQUEST["ROUTE"]["USER_GROUP"]
     if USER_GROUP == "UG_Test":
         return ROUTE_MODULE(REQUEST)
     return INVALID_USER_GROUP()
@@ -55,7 +55,7 @@ def INVALID_USER_GROUP():
 #-------------------------------------------------------------------------------
 
 def ROUTE_MODULE(REQUEST):
-    MODULE = REQUEST["MODULE"]
+    MODULE = REQUEST["ROUTE"]["MODULE"]
     if MODULE == "M_Test":
         return ROUTE_COMMAND(REQUEST)
     return INVALID_MODULE()
@@ -70,7 +70,7 @@ def INVALID_MODULE():
 #-------------------------------------------------------------------------------
 
 def ROUTE_COMMAND(REQUEST):
-    COMMAND = REQUEST["COMMAND"]
+    COMMAND = REQUEST["ROUTE"]["COMMAND"]
     if COMMAND == "C_Test":
         from .api_test import api_test
         return api_test(REQUEST)

@@ -1,11 +1,13 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 #-------------------------------------------------------------------------------
 # Simply tests weather input value == 'test'.
 #-------------------------------------------------------------------------------
 @csrf_exempt
-def api_test(request):
+def api_test(REQUEST):
 
-    REQUEST = PARSE_REQUEST(request)
-    value = REQUEST.ARGS.get("value")
+    value = REQUEST["ARGS"].get("value")
 
     # Check request had value == "test" and return response.
     if value == "test":
