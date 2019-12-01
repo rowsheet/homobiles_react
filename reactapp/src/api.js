@@ -1,22 +1,27 @@
+/*
+ * Note: Always RESOLVE the promise if there is ANY data from the API server.
+ * If the API servier is DOWN, then REJECT the promise.
+ *
+ * ONLY REJECT THE PRMOISE IF THE API SERVER IS DOWN!!!
+ */
 var Api = {
     /*
-     * An example async function to simulate network latency.
+     * An example API route.
      * Simply tests weather input value == 'test'.
      * Returns a Promise by calling either `resolve()` or `reject()`.
+     *
+     * RETURNS: JSON
      */
     test: async function(value) {
-        console.log("Api.test()");
         var promise = new Promise(function(resolve, reject) {
-            setTimeout(
-                function() {
-                    console.log("value: " + value);
-                    if (value == "test") {
-                        resolve("FROM API: ok, value = 'test'");
-                    } else {
-                        reject("bad, value != 'test', instead: " + value);
-                    }
-                },
-                1000
+            fetch("/api_test/", {
+                method: "post",
+                body: JSON.stringify({
+                    value: value,
+                }),
+            }).then(
+                response => resolve(response),
+                error => reject(),
             );
         });
         return promise;

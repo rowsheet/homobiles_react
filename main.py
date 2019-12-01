@@ -1,5 +1,5 @@
-import os
-from flask import Flask, request, send_from_directory, redirect
+import os, json
+from flask import Flask, request, send_from_directory, redirect, Response
 app = Flask(__name__, static_url_path='')
 
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
@@ -87,6 +87,38 @@ div#app_loading_spinner {
             sessionStorage.setItem("RS_DEBUG", false);
         </script>"""
     }
+
+#-------------------------------------------------------------------------------
+# An example API route that sleeps for 1 second to simulate network latency.
+# Simply tests weather input value == 'test'.
+# Returns a Promise by calling either `resolve()` or `reject()`.
+#-------------------------------------------------------------------------------
+@app.route('/api_test/', methods=['GET', 'POST'])
+def api_test():
+
+    # Sleep for 1 second to simulate latency.
+    import time
+    time.sleep(1)
+
+    # Parse request args.
+    args = json.loads(request.data.decode('utf-8'))
+    value = args.get("value")
+
+    # Check request had value == "test" and return response.
+    if value == "test":
+        return Response(
+            json.dumps({
+                "data": ("OK GOT '%s'" % str(value))
+            }),
+            status=200,
+            mimetype='application/json')
+    else:
+        return Response(
+            json.dumps({
+                "data": ("BAD GOT '%s'" % str(value))
+            }),
+            status=400,
+            mimetype='application/json')
 
 @app.route('/reactapp/<path:path>')
 def reactapp(path):

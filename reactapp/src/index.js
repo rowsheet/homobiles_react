@@ -69,6 +69,8 @@ class App extends React.Component {
         this._view_config = this._view_config.bind(this);
         this.tempViewToggle = this.tempViewToggle.bind(this);
         this.updateState = this.updateState.bind(this);
+        this.render_CHECK_INTERNET_CONNECTION =
+            this.render_CHECK_INTERNET_CONNECTION.bind(this);
 
         // API Handlers:
 
@@ -121,16 +123,25 @@ class App extends React.Component {
         // Load from the API (API returns promise).
 
         Api.test(value).then(
-            function resolve(response) {
-                this.updateState({
-                        state_test: "RESOLVED: " + response,
+
+            // RESOLVED
+
+            ((response) => {
+                response.json().then((json) => {
+                    this.updateState({
+                        state_test: `RESOLVED:[${response.status}] ` +
+                            JSON.stringify(json),
+                    });
                 });
-            }.bind(this),
-            function reject(response) {
+            }).bind(this),
+
+            // REJECTED (API SERVER DOWN)
+
+            ((error) => {
                 this.updateState({
-                        state_test: "REJECTED: " + response,
+                    INERNET_DOWN: true,
                 });
-            }.bind(this)
+            }).bind(this)
         );
     }
 
@@ -239,9 +250,45 @@ class App extends React.Component {
         }
     }
 
+    render_CHECK_INTERNET_CONNECTION() {
+        if (!this.state.INERNET_DOWN) {
+            return "";
+        }
+        var overlayStyle = {
+            background: "#00000075",
+            position: "absolute",
+            zIndex: "9000000",
+            height: "100%",
+            width: "100%",
+        };
+        var modalStyle = {
+            background: "white",
+            margin: "10vw",
+            padding: "5vw",
+            marginTop: "33%",
+            borderRadius: "10px",
+        };
+        var dangerIconStyle = {
+            color: "#F44336",
+        };
+        return (
+            <div style={ overlayStyle }>
+                <div style={ modalStyle }>
+                    <i className="fas fa-exclamation-triangle"
+                        style={ dangerIconStyle }></i>
+                    <div style={{ display: "inline-block" }}>
+                        You're not connected to the internet.
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     render() {
+        var CHECK_INTERNET_CONNECTION = this.render_CHECK_INTERNET_CONNECTION();
         return (
 <div>
+    { CHECK_INTERNET_CONNECTION }
     { this.tempViewToggle(true) }
     { this.devTools() }
     <LayoutWithSidebar {...this.state }>
