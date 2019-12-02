@@ -1,1 +1,1 @@
-web: webpack --config=webpack.config.js; python manage.py collectstatic --noinput; gunicorn homobiles.wsgi --log-file -
+web: webpack --config=webpack.config.js; python manage.py collectstatic --noinput; gunicorn wsgi --log-file -
