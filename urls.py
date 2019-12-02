@@ -78,7 +78,7 @@ div#app_loading_spinner {
     </div>
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-<script src="/static/dist/main.js"></script>
+<script src="/static/homobiles/dist/main.js"></script>
     </body>
 </html>
         """ % {
@@ -100,7 +100,7 @@ div#app_loading_spinner {
                 <a href="/accounts/login">login</a>
         """)
 
-from .api_router import Handle
+from rowsheet.api_router import Handle
 
 urlpatterns = [
     path("admin/", admin.site.urls),

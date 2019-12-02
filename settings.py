@@ -2,10 +2,10 @@ import os
 import django_heroku 
 import dj_database_url
 import dotenv
-from .env import PARSE_ENV
+from rowsheet.env import PARSE_ENV
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "homobiles",         # Core application.
+    "rowsheet",         # Core application.
+    "homobiles",         # Client application.
 ]
 
 MIDDLEWARE = [
@@ -41,14 +42,14 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
-ROOT_URLCONF = "homobiles.urls"
+ROOT_URLCONF = "urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(BASE_DIR, "homobiles/templates"),
-            os.path.join(BASE_DIR, "homobiles/templates", "allauth"),
+            os.path.join(BASE_DIR, "rowsheet/templates"),
+            os.path.join(BASE_DIR, "rowsheet/templates", "allauth"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -62,7 +63,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "homobiles.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -137,3 +138,6 @@ api_spec_file_path = os.path.join(BASE_DIR, "api.spec")
 if os.path.isfile(api_spec_file_path):
     with open(api_spec_file_path, "r") as api_spec_file:
         API_SPEC = api_spec_file.read()
+else:
+    print("------------------NO API SPEC")
+    print(BASE_DIR)

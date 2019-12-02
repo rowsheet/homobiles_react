@@ -7,4 +7,5 @@ dump.sql
 .DS_store
 node_modules
 webpack.nohup
-homobiles/static/dist
+homobiles/static/homobiles/dist
+cli.py
