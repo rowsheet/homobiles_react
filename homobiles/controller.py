@@ -5,50 +5,36 @@ def func(_lambda, *args):
     return _lambda(*args)
 
 def PARSE_CONFIG(config):
-    # split config by newlines, remove empty lines.
-    lines = list(filter(lambda line: (len(line) != 0 and len(line.replace(" ","")) != 0), config.split("\n")))
-    # split config by newlines, remove empty lines.
-    lines = [" ".join(line.split()) for line in lines]
-    config = [
-        func(
-            (lambda token:
-                {
-                    "return_type": token[1],
-                    "auth": func(
-                        (lambda x:
-                            func(
-                                (lambda x:
-                                    {
-                                        "user": x[0].strip("["),
-                                        "pass": x[1].strip(":"),
-                                    }
-                                ), x.split("]")
-                            ) if x.lower() != "none" else None
-                        ),
-                        token[2]
-                    ),
-                    "method": " ".join(token[3:]).split("(")[0],
-                    "params": [
-                        func(
-                            (lambda x:
-                                {
-                                    "type": x[0],
-                                    "name": x[1],
-                                }
-                            ), pair.strip(" ").split(" ")
-                        ) if pair != "...?" and pair != "" else {}
-                        for pair in " ".join(token[3:]).split("(")[1].replace(")","").split(",")
-                    ]
-                }
-            ),
-            line.split()
+    return [
+        func((lambda token: {
+            # HTTP method type (GET or POST)
+            "method": token[0],
+            # Return data type (should be a class or type)
+            "return_type": token[1],
+            # Authorization in HTTP_AUTHORIZATION header format.
+            "auth": func((lambda x: func((lambda x: {
+                "user": x[0].strip("["),
+                "pass": x[1].strip(":"),
+                }), x.split("]"))
+                if x.lower() != "none" else None),token[2]),
+            # Name of the function.
+            "command": " ".join(token[3:]).split("(")[0],
+            # Static function declaration (type, name).
+            "params": [func((lambda x:{
+                "type": x[0],
+                "name": x[1],
+                }), pair.strip(" ").split(" ") )
+                # Questionmark means not implemented so empty parameters.
+                if pair != "...?" and pair != "" else {}
+                for pair in " ".join(token[3:]).split("(")[1].replace(")","").split(",")
+            ]}),line.split()
         )
-        for line in lines
+        for line in [" ".join(line.split()) for line in list(
+            # Remove empty lines and extra spaces so we can tokenize by spaces.
+            filter(lambda line: (len(line) != 0 and len(line.replace(" ","")) != 0),
+                # Split by new lines.
+                config.split("\n")))]
     ]
-
-    return {
-            "config": config, 
-    }
 
 if __name__ == "__main__":
 
