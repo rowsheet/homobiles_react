@@ -1,7 +1,10 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from termcolor import cprint
+
 from .request import PARSE_REQUEST
+from .status_codes import HTTP
 
 #-------------------------------------------------------------------------------
 # API
@@ -16,9 +19,11 @@ def API(request):
         return INVALID_API_REQUEST(ex)
 
 def INVALID_API_REQUEST(ex):
+    msg = "Invalid Unparsable Request."
+    cprint(msg + " " + str(ex), "red")
     return JsonResponse({
-        "error": "Invalid Unparsable Request: " + str(ex),
-    },status=400)
+        "error": msg,
+    }, status = HTTP.BAD_REQUEST )
 
 #-------------------------------------------------------------------------------
 # VERSION
@@ -28,12 +33,12 @@ def ROUTE_VERSION(REQUEST):
     VERSION = REQUEST["ROUTE"]["VERSION"]
     if VERSION == "v1":
         return ROUTE_USER_GROUP(REQUEST)
-    return INVALID_VERSION()
+    return UNKNOWN_VERSION()
 
-def INVALID_VERSION():
+def UNKNOWN_VERSION():
     return JsonResponse({
-        "error": "Invalid Request: Unsupported Version.",
-    },status=400)
+        "error": "Invalid Request: Unknown Version.",
+    }, status = HTTP.NOT_FOUND )
 
 #-------------------------------------------------------------------------------
 # USER GROUP 
@@ -41,14 +46,14 @@ def INVALID_VERSION():
 
 def ROUTE_USER_GROUP(REQUEST):
     USER_GROUP = REQUEST["ROUTE"]["USER_GROUP"]
-    if USER_GROUP == "UG_Test":
+    if USER_GROUP == "test":
         return ROUTE_MODULE(REQUEST)
-    return INVALID_USER_GROUP()
+    return UNKNOWN_USER_GROUP()
 
-def INVALID_USER_GROUP():
+def UNKNOWN_USER_GROUP():
     return JsonResponse({
-        "error": "Invalid Request: Unsupported User Group.",
-    },status=400)
+        "error": "Invalid Request: Unknown User Group.",
+    }, status = HTTP.NOT_FOUND )
 
 #-------------------------------------------------------------------------------
 # MODULE
@@ -56,14 +61,14 @@ def INVALID_USER_GROUP():
 
 def ROUTE_MODULE(REQUEST):
     MODULE = REQUEST["ROUTE"]["MODULE"]
-    if MODULE == "M_Test":
+    if MODULE == "test":
         return ROUTE_COMMAND(REQUEST)
-    return INVALID_MODULE()
+    return UNKNOWN_MODULE()
 
-def INVALID_MODULE():
+def UNKNOWN_MODULE():
     return JsonResponse({
-        "error": "Invalid Request: Unsupported Module.",
-    },status=400)
+        "error": "Invalid Request: Unknown Module.",
+    }, status = HTTP.NOT_FOUND )
 
 #-------------------------------------------------------------------------------
 # COMMAND
@@ -71,12 +76,15 @@ def INVALID_MODULE():
 
 def ROUTE_COMMAND(REQUEST):
     COMMAND = REQUEST["ROUTE"]["COMMAND"]
-    if COMMAND == "C_Test":
+    if COMMAND == "test":
         from .api_test import api_test
         return api_test(REQUEST)
-    return INVALID_COMMAND()
+    if COMMAND == "dump_request":
+        from .api_test import dump_request
+        return dump_request(REQUEST)
+    return UNKNOWN_COMMAND()
 
-def INVALID_COMMAND():
+def UNKNOWN_COMMAND():
     return JsonResponse({
-        "error": "Invalid Request: Unsupported Command.",
-    },status=400)
+        "error": "Invalid Request: Unknown Command.",
+    }, status = HTTP.NOT_FOUND )

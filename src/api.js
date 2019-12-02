@@ -14,7 +14,7 @@ var Api = {
      */
     test: async function(value) {
         var promise = new Promise(function(resolve, reject) {
-            fetch("/api/v1/UG_Test/M_Test/C_Test/", {
+            fetch("/api/v1/test/test/test/", {
                 method: "post",
                 body: JSON.stringify({
                     value: value,

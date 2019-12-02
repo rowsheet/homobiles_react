@@ -3,6 +3,7 @@ import './static/style.css';
 import React from "react";
 
 import Api from "./api";
+import HTTP from "./status_codes";
 
 import LayoutWithSidebar from './common/LayoutWithSidebar';
 // DEMO
@@ -128,6 +129,11 @@ class App extends React.Component {
 
             ((response) => {
                 response.json().then((json) => {
+                    var status = response.status;
+                    console.log("STATUS: " + status);
+                    if (status == HTTP.NOT_FOUND) {
+                        console.log("NOT FOUND");
+                    }
                     this.updateState({
                         state_test: `RESOLVED:[${response.status}] ` +
                             JSON.stringify(json),

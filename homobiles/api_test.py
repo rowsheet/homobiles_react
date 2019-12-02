@@ -18,3 +18,7 @@ def api_test(REQUEST):
         return JsonResponse({
                 "data": ("BAD GOT '%s'" % str(value))
             },status=400)
+
+@csrf_exempt
+def dump_request(REQUEST):
+    return JsonResponse(REQUEST, status=200)

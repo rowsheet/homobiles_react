@@ -50,7 +50,18 @@ curl -s localhost:5002/api_test/?value=ValueFromGET\
 """)
 
 run_curl("""
-curl -s localhost:5002/api/v1/UG_Test/M_Test/C_Test\
+curl -s localhost:5002/api/v1/test/test/test \
+    -X POST \
+    -u [TOKEN]: \
+    -d value="Value from TEST" \
+    -d amount=2000 \
+    -d currency=usd \
+    -d description="Charge for jenny.rosen@example.com" \
+    -d source=tok_mastercard
+""")
+
+run_curl("""
+curl -s localhost:5002/api/v1/test/test/dump_request \
     -X POST \
     -u [TOKEN]: \
     -d value="Value from TEST" \
