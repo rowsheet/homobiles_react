@@ -129,3 +129,11 @@ SITE_ID = 1
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
+
+#-------------------------------------------------------------------------------
+# API SPEC.
+#-------------------------------------------------------------------------------
+api_spec_file_path = os.path.join(BASE_DIR, "api.spec")
+if os.path.isfile(api_spec_file_path):
+    with open(api_spec_file_path, "r") as api_spec_file:
+        API_SPEC = api_spec_file.read()

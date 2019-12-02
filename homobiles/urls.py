@@ -100,12 +100,12 @@ div#app_loading_spinner {
                 <a href="/accounts/login">login</a>
         """)
 
-from .api import API 
+from .api_router import Handle
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     url(r"^accounts/", include("allauth.urls")),
     path("", index),
     # API V1
-    url(r"^api", API),
+    url(r"^api", Handle),
 ]
